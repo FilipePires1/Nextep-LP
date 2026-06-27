@@ -1,30 +1,35 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NEXTEP SOLUTIONS — Marketing Digital e IA</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <base target="_blank">
 </head>
+
 <body>
     <div class="custom-cursor" id="cursor"></div>
     <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
         <svg class="moon-icon" viewBox="0 0 24 24">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
         </svg>
         <svg class="sun-icon" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="5"/>
-            <line x1="12" y1="1" x2="12" y2="3"/>
-            <line x1="12" y1="21" x2="12" y2="23"/>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-            <line x1="1" y1="12" x2="3" y2="12"/>
-            <line x1="21" y1="12" x2="23" y2="12"/>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            <circle cx="12" cy="12" r="5" />
+            <line x1="12" y1="1" x2="12" y2="3" />
+            <line x1="12" y1="21" x2="12" y2="23" />
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+            <line x1="1" y1="12" x2="3" y2="12" />
+            <line x1="21" y1="12" x2="23" y2="12" />
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
         </svg>
     </button>
     <header class="header" id="header">
@@ -52,13 +57,15 @@
         <a href="#diagnostico" class="btn-outline" style="margin-top:16px">Diagnóstico Gratuito</a>
     </div>
     <section class="hero">
+        <canvas id="heroCanvas" class="hero-canvas"></canvas>
         <div class="dot-grid"></div>
         <div class="hero-content reveal">
             <h1 class="hero-headline">
                 <span class="line-1">Seu negócio no</span>
                 <span class="line-2 metallic-text">próximo nível.</span>
             </h1>
-            <p class="hero-subtitle">Tráfego pago, landing pages e agente de IA para WhatsApp — tudo integrado, tudo medido.</p>
+            <p class="hero-subtitle">Tráfego pago, landing pages e agente de IA para WhatsApp — tudo integrado, tudo
+                medido.</p>
             <div class="hero-cta-group">
                 <a href="#diagnostico" class="btn-primary">Solicitar Diagnóstico Gratuito</a>
                 <span class="hero-tiny">Diagnóstico gratuito · Sem compromisso · Resposta em até 24h</span>
@@ -71,17 +78,41 @@
     </section>
     <section class="credibility">
         <div class="credibility-inner reveal-stagger">
-            <div class="cred-item"><div><div class="cred-number">+30</div><div class="cred-label">empresas atendidas</div></div></div>
-            <div class="cred-item"><div><div class="cred-number">+3</div><div class="cred-label">estados</div></div></div>
-            <div class="cred-item"><div><div class="cred-number">4x</div><div class="cred-label">ROI médio</div></div></div>
-            <div class="cred-item"><div><div class="cred-number">24h</div><div class="cred-label">resposta garantida</div></div></div>
+            <div class="cred-item">
+                <div>
+                    <div class="cred-number">+30</div>
+                    <div class="cred-label">empresas atendidas</div>
+                </div>
+            </div>
+            <div class="cred-item">
+                <div>
+                    <div class="cred-number">+3</div>
+                    <div class="cred-label">estados</div>
+                </div>
+            </div>
+            <div class="cred-item">
+                <div>
+                    <div class="cred-number">4x</div>
+                    <div class="cred-label">ROI médio</div>
+                </div>
+            </div>
+            <div class="cred-item">
+                <div>
+                    <div class="cred-number">24h</div>
+                    <div class="cred-label">resposta garantida</div>
+                </div>
+            </div>
         </div>
     </section>
     <section class="positioning" id="posicionamento">
         <div class="positioning-inner reveal">
             <h2 class="positioning-title">Não somos uma agência.<br>Somos uma estrutura de crescimento.</h2>
-            <p class="positioning-text">A maioria das agências te entrega um relatório bonito no final do mês. A Nextep entrega resultado mensurável — clientes novos, leads qualificados e receita real. Não acreditamos em métricas de vaidade. Acreditamos em números que aparecem no extrato bancário.</p>
-            <p class="positioning-text">Cada cliente da Nextep tem uma estratégia própria, construída do zero para o negócio dele. Não vendemos pacotes genéricos, não reaproveitamos templates de campanha e não tratamos empresas como números em uma planilha. Seu negócio é único — sua estratégia também deve ser.</p>
+            <p class="positioning-text">A maioria das agências te entrega um relatório bonito no final do mês. A Nextep
+                entrega resultado mensurável — clientes novos, leads qualificados e receita real. Não acreditamos em
+                métricas de vaidade. Acreditamos em números que aparecem no extrato bancário.</p>
+            <p class="positioning-text">Cada cliente da Nextep tem uma estratégia própria, construída do zero para o
+                negócio dele. Não vendemos pacotes genéricos, não reaproveitamos templates de campanha e não tratamos
+                empresas como números em uma planilha. Seu negócio é único — sua estratégia também deve ser.</p>
         </div>
     </section>
     <div class="metallic-separator"></div>
@@ -89,28 +120,54 @@
         <div class="section-inner">
             <div class="services-header reveal">
                 <h2 class="section-title">O que entregamos</h2>
-                <p class="section-subtitle">Cada serviço é uma peça. Juntos, formam um sistema de aquisição de clientes.</p>
+                <p class="section-subtitle">Cada serviço é uma peça. Juntos, formam um sistema de aquisição de clientes.
+                </p>
             </div>
             <div class="services-grid reveal-stagger">
                 <div class="service-card">
-                    <svg class="service-icon" viewBox="0 0 48 48"><path d="M24 4L4 14v20l20 10 20-10V14L24 4z"/><path d="M4 14l20 10 20-10"/><path d="M24 24v20"/></svg>
-                    <h3 class="service-name">Gestão de Tráfego Pago</h3>
-                    <p class="service-desc">Meta Ads e Google Ads gerenciados com foco em retorno real. Você sabe exatamente quanto investiu e quantos clientes chegaram.</p>
-                </div>
-                <div class="service-card">
-                    <svg class="service-icon" viewBox="0 0 48 48"><rect x="6" y="8" width="36" height="32" rx="2"/><line x1="6" y1="18" x2="42" y2="18"/><line x1="16" y1="26" x2="32" y2="26"/><line x1="16" y1="32" x2="24" y2="32"/></svg>
-                    <h3 class="service-name">Landing Pages de Alta Conversão</h3>
-                    <p class="service-desc">Páginas construídas para transformar visitante em lead — com copy, estrutura e velocidade otimizados para o seu público.</p>
-                </div>
-                <div class="service-card">
-                    <svg class="service-icon" viewBox="0 0 48 48"><rect x="8" y="4" width="32" height="40" rx="4"/><circle cx="24" cy="36" r="2"/><line x1="24" y1="10" x2="24" y2="28"/><polyline points="18,22 24,28 30,22"/></svg>
+                    <svg class="service-icon" viewBox="0 0 48 48">
+                        <rect x="8" y="4" width="32" height="40" rx="4" />
+                        <circle cx="24" cy="36" r="2" />
+                        <line x1="24" y1="10" x2="24" y2="28" />
+                        <polyline points="18,22 24,28 30,22" />
+                    </svg>
                     <h3 class="service-name">Agente de IA para WhatsApp</h3>
-                    <p class="service-desc">Um agente treinado com a voz do seu negócio que responde, qualifica e agenda clientes 24 horas por dia, 7 dias por semana.</p>
+                    <p class="service-desc">Um agente treinado com a voz do seu negócio que responde, qualifica e agenda
+                        clientes 24 horas por dia, 7 dias por semana.</p>
                 </div>
                 <div class="service-card">
-                    <svg class="service-icon" viewBox="0 0 48 48"><circle cx="24" cy="16" r="8"/><path d="M8 40c0-8.8 7.2-16 16-16s16 7.2 16 16"/><circle cx="38" cy="10" r="4"/><path d="M42 40c0-4.4-3.6-8-8-8"/></svg>
+                    <svg class="service-icon" viewBox="0 0 48 48">
+                        <rect x="6" y="8" width="36" height="32" rx="2" />
+                        <line x1="6" y1="18" x2="42" y2="18" />
+                        <line x1="16" y1="26" x2="32" y2="26" />
+                        <line x1="16" y1="32" x2="24" y2="32" />
+                    </svg>
+                    <h3 class="service-name">Landing Pages de Alta Conversão</h3>
+                    <p class="service-desc">Páginas construídas para transformar visitante em lead — com copy, estrutura
+                        e velocidade otimizados para o seu público.</p>
+                </div>
+                <div class="service-card">
+                    <svg class="service-icon" viewBox="0 0 48 48">
+                        <circle cx="24" cy="16" r="8" />
+                        <path d="M8 40c0-8.8 7.2-16 16-16s16 7.2 16 16" />
+                        <circle cx="38" cy="10" r="4" />
+                        <path d="M42 40c0-4.4-3.6-8-8-8" />
+                    </svg>
                     <h3 class="service-name">Geração de Leads Qualificados</h3>
-                    <p class="service-desc">Leads que já conhecem seu produto e querem comprar — não contatos frios sem intenção.</p>
+                    <p class="service-desc">Leads que já conhecem seu produto e querem comprar — não contatos frios sem
+                        intenção.</p>
+
+                </div>
+
+                <div class="service-card">
+                    <svg class="service-icon" viewBox="0 0 48 48">
+                        <path d="M24 4L4 14v20l20 10 20-10V14L24 4z" />
+                        <path d="M4 14l20 10 20-10" />
+                        <path d="M24 24v20" />
+                    </svg>
+                    <h3 class="service-name">Gestão de Tráfego Pago</h3>
+                    <p class="service-desc">Meta Ads e Google Ads gerenciados com foco em retorno real. Você
+                        sabe exatamente quanto investiu e quantos clientes chegaram.</p>
                 </div>
             </div>
         </div>
@@ -118,7 +175,9 @@
     <div class="metallic-separator"></div>
     <section class="how-it-works" id="como-funciona">
         <div class="section-inner">
-            <div class="reveal"><h2 class="section-title">Do diagnóstico ao resultado</h2></div>
+            <div class="reveal">
+                <h2 class="section-title">Do diagnóstico ao resultado</h2>
+            </div>
             <div class="steps-container">
                 <div class="step reveal">
                     <div class="step-number metallic-text">01</div>
@@ -132,7 +191,8 @@
                     <div class="step-number metallic-text">02</div>
                     <div class="step-content">
                         <h3 class="step-title">A gente te chama em até 24h</h3>
-                        <p class="step-desc">Entendemos seu negócio, mapeamos os gargalos e apresentamos o que faz sentido para você.</p>
+                        <p class="step-desc">Entendemos seu negócio, mapeamos os gargalos e apresentamos o que faz
+                            sentido para você.</p>
                     </div>
                 </div>
                 <div class="step-divider"></div>
@@ -140,7 +200,8 @@
                     <div class="step-number metallic-text">03</div>
                     <div class="step-content">
                         <h3 class="step-title">Execução com resultado medido</h3>
-                        <p class="step-desc">Estratégia personalizada, execução com prazo definido e relatório claro. Você acompanha tudo.</p>
+                        <p class="step-desc">Estratégia personalizada, execução com prazo definido e relatório claro.
+                            Você acompanha tudo.</p>
                     </div>
                 </div>
             </div>
@@ -160,26 +221,132 @@
         <div class="section-inner">
             <div class="reveal">
                 <h2 class="section-title">Resultados reais de clientes reais</h2>
-                <p class="section-subtitle">Não é promessa de marketing. É o que acontece quando estratégia e execução andam juntas.</p>
+                <p class="section-subtitle">Não é promessa de marketing. É o que acontece quando estratégia e execução
+                    andam juntas.</p>
             </div>
-            <div class="testimonials-grid reveal-stagger">
-                <div class="testimonial-card">
-                    <div class="testimonial-avatar">MR</div>
-                    <p class="testimonial-text">"Em 45 dias, nosso faturamento de tráfego pago triplicou. A Nextep não só gerencia campanhas — eles entendem de verdade o nosso negócio."</p>
-                    <div class="testimonial-name">Mariana Rocha</div>
-                    <div class="testimonial-business">Clínica de Estética — São Paulo</div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-avatar">LF</div>
-                    <p class="testimonial-text">"O agente de IA qualificou mais leads em uma semana do que nossa equipe em um mês. Resultado imediato, sem enrolação."</p>
-                    <div class="testimonial-name">Lucas Ferreira</div>
-                    <div class="testimonial-business">Imobiliária — Curitiba</div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-avatar">AT</div>
-                    <p class="testimonial-text">"Landing page nova, campanha no ar em 72h. Em duas semanas já tínhamos 47 leads qualificados. Investimento que se pagou sozinho."</p>
-                    <div class="testimonial-name">Ana Torres</div>
-                    <div class="testimonial-business">Consultoria Financeira — Rio de Janeiro</div>
+            <div class="testimonials-carousel-wrapper">
+                <div class="testimonials-track" id="testimonialsTrack">
+                    <!-- Card 1 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">VO</div>
+                        <p class="testimonial-text">"O tráfego pago da Nextep deu um salto gigante no nosso negócio aqui
+                            em
+                            Ipatinga. O volume de vendas aumentou de forma absurda, tanto no online quanto na loja
+                            física.
+                            Superou todas as expectativas!"</p>
+                        <div class="testimonial-name">Loja de Roupas</div>
+                        <div class="testimonial-business">Ipatinga - MG</div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">NR</div>
+                        <p class="testimonial-text">"O bot automatizou todo o nosso atendimento na época mais
+                            movimentada do
+                            ano. Rodou tudo tão perfeito e sozinho que nem precisamos contratar secretária para dar
+                            conta
+                            das mensagens."</p>
+                        <div class="testimonial-name">Aluguel de Roupas Juninas</div>
+                        <div class="testimonial-business">Ipatinga - MG</div>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">CS</div>
+                        <p class="testimonial-text">"O agente de IA resolve quase tudo sozinho, desde tirar dúvidas até
+                            agendar consultas. Reduziu tanto o gargalo que não precisamos mais de secretária dedicada
+                            para o
+                            telefone."</p>
+                        <div class="testimonial-name">Clínica Cardiovascular</div>
+                        <div class="testimonial-business">Coronel Fabriciano</div>
+                    </div>
+                    <!-- Card 4 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">FI</div>
+                        <p class="testimonial-text">"A entrega da IA junto com o CRM automatizou completamente nossa
+                            gestão
+                            de clientes. O atendimento ficou instantâneo, os leads chegam organizados e o processo ficou
+                            100% profissional."</p>
+                        <div class="testimonial-name">Imobiliária</div>
+                        <div class="testimonial-business">São Paulo - SP</div>
+                    </div>
+                    <!-- Card 5 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">FL</div>
+                        <p class="testimonial-text">"O sistema de atendimento deles preencheu nossa agenda de avaliações
+                            como nunca tínhamos visto. A automação confirmava as consultas sozinha e reduziu as faltas
+                            dos
+                            pacientes quase a zero."</p>
+                        <div class="testimonial-name">Clínica Odontológica</div>
+                        <div class="testimonial-business">Timóteo - MG</div>
+                    </div>
+                    <!-- Card 6 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">LG</div>
+                        <p class="testimonial-text">"A IA mudou meu jogo no mercado imobiliário. Ela responde os leads
+                            de
+                            madrugada, qualifica quem realmente tem dinheiro para comprar e deixa o cliente pronto só
+                            para
+                            eu agendar a visita. Não perco mais nenhuma venda."</p>
+                        <div class="testimonial-name">Corretor de Imóveis</div>
+                        <div class="testimonial-business">Curitiba - PR</div>
+                    </div>
+                    <!-- Cópias para loop infinito -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">VO</div>
+                        <p class="testimonial-text">"O tráfego pago da Nextep deu um salto gigante no nosso negócio aqui
+                            em
+                            Ipatinga. O volume de vendas aumentou de forma absurda, tanto no online quanto na loja
+                            física.
+                            Superou todas as expectativas!"</p>
+                        <div class="testimonial-name">Loja de Roupas</div>
+                        <div class="testimonial-business">Ipatinga - MG</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">NR</div>
+                        <p class="testimonial-text">"O bot automatizou todo o nosso atendimento na época mais
+                            movimentada do
+                            ano. Rodou tudo tão perfeito e sozinho que nem precisamos contratar secretária para dar
+                            conta
+                            das mensagens."</p>
+                        <div class="testimonial-name">Aluguel de Roupas Juninas</div>
+                        <div class="testimonial-business">Ipatinga - MG</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">CS</div>
+                        <p class="testimonial-text">"O agente de IA resolve quase tudo sozinho, desde tirar dúvidas até
+                            agendar consultas. Reduziu tanto o gargalo que não precisamos mais de secretária dedicada
+                            para o
+                            telefone."</p>
+                        <div class="testimonial-name">Clínica Cardiovascular</div>
+                        <div class="testimonial-business">Coronel Fabriciano</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">FI</div>
+                        <p class="testimonial-text">"A entrega da IA junto com o CRM automatizou completamente nossa
+                            gestão
+                            de clientes. O atendimento ficou instantâneo, os leads chegam organizados e o processo ficou
+                            100% profissional."</p>
+                        <div class="testimonial-name">Imobiliária</div>
+                        <div class="testimonial-business">São Paulo - SP</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">FL</div>
+                        <p class="testimonial-text">"O sistema de atendimento deles preencheu nossa agenda de avaliações
+                            como nunca tínhamos visto. A automação confirmava as consultas sozinha e reduziu as faltas
+                            dos
+                            pacientes quase a zero."</p>
+                        <div class="testimonial-name">Clínica Odontológica</div>
+                        <div class="testimonial-business">Timóteo - MG</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">LG</div>
+                        <p class="testimonial-text">"A IA mudou meu jogo no mercado imobiliário. Ela responde os leads
+                            de
+                            madrugada, qualifica quem realmente tem dinheiro para comprar e deixa o cliente pronto só
+                            para
+                            eu agendar a visita. Não perco mais nenhuma venda."</p>
+                        <div class="testimonial-name">Corretor de Imóveis</div>
+                        <div class="testimonial-business">Curitiba - PR</div>
+                    </div>
                 </div>
             </div>
             <div class="social-proof-cta reveal">
@@ -191,48 +358,85 @@
     <div class="metallic-separator"></div>
     <section class="about" id="sobre">
         <div class="section-inner">
-            <div class="reveal"><h2 class="section-title">Quem está por trás da Nextep</h2></div>
+            <div class="reveal">
+                <h2 class="section-title">Quem está por trás da Nextep</h2>
+            </div>
             <div class="about-grid reveal-stagger">
                 <div class="about-card">
-                    <div class="about-avatar"><span class="about-avatar-text">GF</span></div>
-                    <h3 class="about-name">Gabriel Ferreira</h3>
-                    <p class="about-role">Co-fundador & Estratégia</p>
-                    <p class="about-bio">Mais de 8 anos gerenciando tráfego pago para empresas de todos os tamanhos. Fundou a Nextep porque cansou de ver pequenos negócios sendo enganados por agências que prometem o mundo e entregem planilhas. Acredita que marketing de verdade é matemática, não mágica.</p>
+                    <div class="about-avatar"><span class="about-avatar-text">FN</span></div>
+                    <h3 class="about-name">Filipe Nogueira</h3>
+                    <p class="about-role">CEO & Estratégia</p>
+                    <p class="about-bio">Mais de 2 anos gerenciando tráfego pago para empresas de todos os tamanhos.
+                        Fundou a Nextep porque cansou de ver pequenos negócios sendo
+                        enganados por agências que prometem o mundo e entregam planilhas. Hoje, atua estritamente na
+                        gestão e direcionamento estratégico da estrutura da empresa, validando o sucesso do método com
+                        mais de 50 clientes satisfeitos. Acredita que marketing de verdade é matemática, não mágica.
                 </div>
                 <div class="about-card">
-                    <div class="about-avatar"><span class="about-avatar-text">RM</span></div>
-                    <h3 class="about-name">Rafael Mendes</h3>
-                    <p class="about-role">Co-fundador & Tecnologia</p>
-                    <p class="about-bio">Desenvolvedor e especialista em automação de marketing. Criou o primeiro agente de IA da Nextep depois de ver uma loja de móveis perder 60% dos leads por demora no atendimento. Acredita que tecnologia só vale quando resolve problema real.</p>
+                    <div class="about-avatar"><span class="about-avatar-text">TP</span></div>
+                    <h3 class="about-name">Tiago Pereira</h3>
+                    <p class="about-role">Co-fundador & Marketing</p>
+                    <p class="about-bio">Co-fundador da Nextep, atua há 1 ano na gestão de marketing da agência e soma 3
+                        anos de experiência na área, com um histórico de mais de 35 clientes ativos e qualificados.
+                        Entrou inicialmente prestando suporte estratégico e, pelo impacto gerado, tornou-se sócio.
+                        Especialista em automação, ele liderou a implementação do primeiro agente de IA da Nextep.
+                        Acredita que tecnologia só vale quando resolve um problema real.
                 </div>
             </div>
-            <p class="about-quote reveal">"Criamos a Nextep porque acreditamos que todo negócio merece crescer com estratégia — não só com sorte."</p>
+            <p class="about-quote reveal">"Criamos a Nextep porque acreditamos que todo negócio merece crescer com
+                estratégia — não só com sorte."</p>
         </div>
     </section>
     <div class="metallic-separator"></div>
     <section class="faq" id="faq">
         <div class="section-inner">
-            <div class="reveal"><h2 class="section-title">Perguntas que outros clientes fizeram antes</h2></div>
+            <div class="reveal">
+                <h2 class="section-title">Perguntas que outros clientes fizeram antes</h2>
+            </div>
             <div class="faq-list reveal-stagger">
                 <div class="faq-item">
                     <button class="faq-question">Quanto custa contratar a Nextep?<span class="faq-icon"></span></button>
-                    <div class="faq-answer"><p>Cada projeto é orçado individualmente após o diagnóstico. Não trabalhamos com pacote único porque cada negócio tem uma realidade diferente. O diagnóstico gratuito serve justamente para entender o que você precisa e apresentar um investimento que faça sentido para o seu estágio.</p></div>
+                    <div class="faq-answer">
+                        <p>Cada projeto é orçado individualmente após o diagnóstico. Não trabalhamos com pacote único
+                            porque cada negócio tem uma realidade diferente. O diagnóstico gratuito serve justamente
+                            para entender o que você precisa e apresentar um investimento que faça sentido para o seu
+                            estágio.</p>
+                    </div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-question">Em quanto tempo vejo resultado?<span class="faq-icon"></span></button>
-                    <div class="faq-answer"><p>Os primeiros resultados de tráfego aparecem entre 15 e 30 dias. Resultados consistentes a partir de 60 dias de operação. Landing pages geralmente convertem desde o primeiro dia de tráfego. O agente de IA começa a qualificar leads imediatamente após a configuração.</p></div>
+                    <div class="faq-answer">
+                        <p>Os primeiros resultados de tráfego aparecem entre 15 e 30 dias. Resultados consistentes a
+                            partir de 60 dias de operação. Landing pages geralmente convertem desde o primeiro dia de
+                            tráfego. O agente de IA começa a qualificar leads imediatamente após a configuração.</p>
+                    </div>
                 </div>
                 <div class="faq-item">
-                    <button class="faq-question">Preciso ter site para contratar vocês?<span class="faq-icon"></span></button>
-                    <div class="faq-answer"><p>Não. Criamos do zero se necessário — landing page faz parte dos nossos serviços. Muitos dos nossos clientes começam sem nenhuma presença digital e construímos tudo junto com a estratégia de tráfego.</p></div>
+                    <button class="faq-question">Preciso ter site para contratar vocês?<span
+                            class="faq-icon"></span></button>
+                    <div class="faq-answer">
+                        <p>Não. Criamos do zero se necessário — landing page faz parte dos nossos serviços. Muitos dos
+                            nossos clientes começam sem nenhuma presença digital e construímos tudo junto com a
+                            estratégia de tráfego.</p>
+                    </div>
                 </div>
                 <div class="faq-item">
-                    <button class="faq-question">O agente de IA substitui minha equipe de atendimento?<span class="faq-icon"></span></button>
-                    <div class="faq-answer"><p>Não substitui — potencializa. O agente cuida dos primeiros contatos e qualificações para que sua equipe foque em fechar negócio. Ele funciona 24/7, nunca tira férias e nunca perde um lead. Sua equipe ganha tempo para o que realmente importa: converter.</p></div>
+                    <button class="faq-question">O agente de IA substitui minha equipe de atendimento?<span
+                            class="faq-icon"></span></button>
+                    <div class="faq-answer">
+                        <p>Não substitui — potencializa. O agente cuida dos primeiros contatos e qualificações para que
+                            sua equipe foque em fechar negócio. Ele funciona 24/7, nunca tira férias e nunca perde um
+                            lead. Sua equipe ganha tempo para o que realmente importa: converter.</p>
+                    </div>
                 </div>
                 <div class="faq-item">
-                    <button class="faq-question">Como funciona o diagnóstico gratuito?<span class="faq-icon"></span></button>
-                    <div class="faq-answer"><p>É uma conversa de 30 a 45 minutos onde mapeamos sua situação atual, identificamos os gargalos e apresentamos o que faz sentido para o seu negócio. Sem pressão, sem venda forçada. Você recebe um documento com análise e plano de ação — mesmo que não feche conosco.</p></div>
+                    <button class="faq-question">Como funciona o diagnóstico gratuito?<span
+                            class="faq-icon"></span></button>
+                    <div class="faq-answer">
+                        <p>É uma conversa de 30 a 45 minutos onde mapeamos sua situação atual, identificamos os gargalos
+                            e apresentamos o que faz sentido para o seu negócio. Sem pressão, sem venda forçada. Você
+                            recebe um documento com análise e plano de ação — mesmo que não feche conosco.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -242,7 +446,7 @@
         <div class="section-inner reveal">
             <h2 class="cta-final-title">Pronto para dar o próximo passo?</h2>
             <p class="cta-final-subtitle">Diagnóstico gratuito. Sem compromisso. Resposta em até 24 horas.</p>
-            <a href="https://wa.me/5511999999999" class="btn-primary" target="_blank">Solicitar Diagnóstico Gratuito</a>
+            <a href="https://wa.me/5531999657698" class="btn-primary" target="_blank">Solicitar Diagnóstico Gratuito</a>
         </div>
     </section>
     <footer class="footer" id="contato">
@@ -250,7 +454,8 @@
         <div class="footer-grid">
             <div class="footer-col">
                 <a href="#" class="logo">NEXTE<span class="logo-symbol">P</span></a>
-                <p class="footer-desc">Agência de marketing digital e inteligência artificial para empresas que querem crescer com estratégia.</p>
+                <p class="footer-desc">Agência de marketing digital e inteligência artificial para empresas que querem
+                    crescer com estratégia.</p>
             </div>
             <div class="footer-col">
                 <h4 class="footer-col-title">Serviços</h4>
@@ -273,25 +478,45 @@
             <div class="footer-col">
                 <h4 class="footer-col-title">Contato</h4>
                 <div class="footer-contact-item">
-                    <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-                    <span>WhatsApp: (11) 99999-9999</span>
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                    </svg>
+                    <span>WhatsApp Suporte: (31) 99965-7698</span>
                 </div>
                 <div class="footer-contact-item">
-                    <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                    <span>contato@nextepsolutions.com.br</span>
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                    </svg>
+                    <span>WhatsApp Vendedor: (31) 98642-9590</span>
                 </div>
                 <div class="footer-contact-item">
-                    <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-                    <span>@nextepsolutions</span>
+                    <svg viewBox="0 0 24 24">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                        <polyline points="22,6 12,13 2,6" />
+                    </svg>
+                    <span>nextep.solutionsorg@gmail.com</span>
                 </div>
                 <div class="footer-contact-item">
-                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                    <span>Seg–Sex, 8h–18h</span>
+                    <svg viewBox="0 0 24 24">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                    </svg>
+                    <span>@nextep.solutions</span>
+                </div>
+                <div class="footer-contact-item">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                    <span>Domingo à Domingo, 24h</span>
                 </div>
             </div>
         </div>
         <div class="footer-bottom">
-            <div class="footer-bottom-left">CNPJ: 00.000.000/0001-00 · Nextep Solutions LTDA</div>
+            <div class="footer-bottom-left">Nextep Digital Solutions</div>
             <div class="footer-bottom-center">© 2025 Nextep Solutions. Todos os direitos reservados.</div>
             <div class="footer-bottom-right">
                 <a href="#">Política de Privacidade</a>
@@ -301,4 +526,5 @@
     </footer>
     <script src="script.js"></script>
 </body>
+
 </html>
