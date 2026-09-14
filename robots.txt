@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /vagas/
+Disallow: /politica-de-privacidade/
+Disallow: /termos-de-uso/
+
+Sitemap: https://nextepsolutions.com.br/sitemap.xml
