@@ -1,529 +1,575 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEXTEP SOLUTIONS — Marketing Digital e IA</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <base target="_blank">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NexTep Solutions — Tecnologia, Automação e Soluções Digitais</title>
+  <meta name="description" content="Tecnologia, automação e soluções digitais para empresas que querem evoluir. Desenvolvimento web, sistemas, CRM, inteligência artificial, automação e marketing digital.">
+  <meta name="keywords" content="soluções digitais, empresa de tecnologia, desenvolvimento de sistemas, desenvolvimento web, CRM, automação empresarial, inteligência artificial, agentes de IA">
+  <meta name="author" content="NexTep Solutions">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://nextepsolutions.com.br/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nextepsolutions.com.br/">
+  <meta property="og:title" content="NexTep Solutions — Tecnologia, Automação e Soluções Digitais">
+  <meta property="og:description" content="Tecnologia, automação e soluções digitais para empresas que querem evoluir.">
+  <meta property="og:image" content="https://nextepsolutions.com.br/og-image.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <div class="custom-cursor" id="cursor"></div>
-    <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
-        <svg class="moon-icon" viewBox="0 0 24 24">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-        </svg>
-        <svg class="sun-icon" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="5" />
-            <line x1="12" y1="1" x2="12" y2="3" />
-            <line x1="12" y1="21" x2="12" y2="23" />
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-            <line x1="1" y1="12" x2="3" y2="12" />
-            <line x1="21" y1="12" x2="23" y2="12" />
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-        </svg>
-    </button>
-    <header class="header" id="header">
-        <a href="#" class="logo">NEXTE<span class="logo-symbol">P</span></a>
-        <nav class="nav-desktop">
-            <a href="#servicos">Serviços</a>
-            <span class="nav-separator">.</span>
-            <a href="#como-funciona">Como funciona</a>
-            <span class="nav-separator">.</span>
-            <a href="#sobre">Sobre</a>
-            <span class="nav-separator">.</span>
-            <a href="#contato">Contato</a>
-        </nav>
-        <a href="#diagnostico" class="btn-outline">Diagnóstico Gratuito</a>
-        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
-            <span></span><span></span><span></span>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header" id="header">
+    <div class="header__inner">
+      <a href="index.html" class="header__logo">
+        <img src="../Logos - Imagens/Nextep/Logo Reduzida Branca.png" alt="NexTep Solutions" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <span class="header__logo-text" style="display:none">NEXTEP</span>
+      </a>
+      <nav class="header__nav">
+        <a href="index.html" class="active">Início</a>
+        <a href="empresa.html">A NexTep</a>
+        <a href="solucoes.html">Soluções</a>
+        <a href="projetos.html">Projetos</a>
+        <a href="parcerias.html">Parcerias</a>
+        <a href="carreiras.html">Carreiras</a>
+        <a href="contato.html">Contato</a>
+      </nav>
+      <div class="header__actions">
+        <a href="contato.html" class="header__cta">Solicitar projeto</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+          <span></span><span></span><span></span>
         </button>
-    </header>
-    <div class="mobile-nav" id="mobileNav">
-        <button class="close-btn" id="closeMobileNav">&times;</button>
-        <a href="#servicos" class="mobile-nav-link">Serviços</a>
-        <a href="#como-funciona" class="mobile-nav-link">Como funciona</a>
-        <a href="#sobre" class="mobile-nav-link">Sobre</a>
-        <a href="#contato" class="mobile-nav-link">Contato</a>
-        <a href="#diagnostico" class="btn-outline" style="margin-top:16px">Diagnóstico Gratuito</a>
+      </div>
     </div>
-    <section class="hero">
-        <canvas id="heroCanvas" class="hero-canvas"></canvas>
-        <div class="dot-grid"></div>
-        <div class="hero-content reveal">
-            <h1 class="hero-headline">
-                <span class="line-1">Seu negócio no</span>
-                <span class="line-2 metallic-text">próximo nível.</span>
-            </h1>
-            <p class="hero-subtitle">Serviço de Atendimento Automático — O próximo passo do seu negócio começa aqui.</p>
-            <div class="hero-cta-group">
-                <a href="#diagnostico" class="btn-primary">Solicitar Diagnóstico Gratuito</a>
-                <span class="hero-tiny">Diagnóstico gratuito · Sem compromisso · Resposta em até 24h</span>
-            </div>
-        </div>
-        <div class="scroll-indicator">
-            <div class="mouse"></div>
-            <span>Scroll</span>
-        </div>
-    </section>
-    <section class="credibility">
-        <div class="credibility-inner reveal-stagger">
-            <div class="cred-item">
-                <div>
-                    <div class="cred-number">+30</div>
-                    <div class="cred-label">empresas atendidas</div>
-                </div>
-            </div>
-            <div class="cred-item">
-                <div>
-                    <div class="cred-number">+6</div>
-                    <div class="cred-label">estados</div>
-                </div>
-            </div>
-            <div class="cred-item">
-                <div>
-                    <div class="cred-number">4x</div>
-                    <div class="cred-label">ROI médio</div>
-                </div>
-            </div>
-            <div class="cred-item">
-                <div>
-                    <div class="cred-number">24h</div>
-                    <div class="cred-label">resposta garantida</div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="positioning" id="posicionamento">
-        <div class="positioning-inner reveal">
-            <h2 class="positioning-title">Não somos uma simples agência.<br>Somos uma estrutura de crescimento.</h2>
-            <p class="positioning-text">A maioria das agências te entrega um relatório bonito no final do mês. A Nextep
-                entrega resultado mensurável — clientes novos, leads qualificados e receita real. Não acreditamos em
-                métricas de vaidade. Acreditamos em números que aparecem no extrato bancário.</p>
-            <p class="positioning-text">Cada cliente da Nextep tem uma estratégia própria, construída do zero para o
-                negócio dele. Não vendemos pacotes genéricos, não reaproveitamos templates de campanha e não tratamos
-                empresas como números em uma planilha. Seu negócio é único — sua estratégia também deve ser.</p>
-        </div>
-    </section>
-    <div class="metallic-separator"></div>
-    <section class="services" id="servicos">
-        <div class="section-inner">
-            <div class="services-header reveal">
-                <h2 class="section-title">O que entregamos</h2>
-                <p class="section-subtitle">Cada serviço é uma peça. Juntos, formam um sistema de aquisição de clientes.
-                </p>
-            </div>
-            <div class="services-grid reveal-stagger">
-                <div class="service-card">
-                    <svg class="service-icon" viewBox="0 0 48 48">
-                        <rect x="8" y="4" width="32" height="40" rx="4" />
-                        <circle cx="24" cy="36" r="2" />
-                        <line x1="24" y1="10" x2="24" y2="28" />
-                        <polyline points="18,22 24,28 30,22" />
-                    </svg>
-                    <h3 class="service-name">Agente de IA para WhatsApp</h3>
-                    <p class="service-desc">Um agente treinado com a voz do seu negócio que responde, qualifica e agenda
-                        clientes 24 horas por dia, 7 dias por semana.</p>
-                </div>
-                <div class="service-card">
-                    <svg class="service-icon" viewBox="0 0 48 48">
-                        <rect x="6" y="8" width="36" height="32" rx="2" />
-                        <line x1="6" y1="18" x2="42" y2="18" />
-                        <line x1="16" y1="26" x2="32" y2="26" />
-                        <line x1="16" y1="32" x2="24" y2="32" />
-                    </svg>
-                    <h3 class="service-name">Landing Pages de Alta Conversão</h3>
-                    <p class="service-desc">Páginas construídas para transformar visitante em lead — com copy, estrutura
-                        e velocidade otimizados para o seu público.</p>
-                </div>
-                <div class="service-card">
-                    <svg class="service-icon" viewBox="0 0 48 48">
-                        <circle cx="24" cy="16" r="8" />
-                        <path d="M8 40c0-8.8 7.2-16 16-16s16 7.2 16 16" />
-                        <circle cx="38" cy="10" r="4" />
-                        <path d="M42 40c0-4.4-3.6-8-8-8" />
-                    </svg>
-                    <h3 class="service-name">Geração de Leads Qualificados</h3>
-                    <p class="service-desc">Leads que já conhecem seu produto e querem comprar — não contatos frios sem
-                        intenção.</p>
+  </header>
 
-                </div>
+  <!-- Mobile Nav -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.html">Início</a>
+    <a href="empresa.html">A NexTep</a>
+    <a href="solucoes.html">Soluções</a>
+    <a href="projetos.html">Projetos</a>
+    <a href="parcerias.html">Parcerias</a>
+    <a href="carreiras.html">Carreiras</a>
+    <a href="contato.html">Contato</a>
+    <a href="contato.html" class="btn btn-primary">Solicitar projeto</a>
+  </div>
 
-                <div class="service-card">
-                    <svg class="service-icon" viewBox="0 0 48 48">
-                        <path d="M24 4L4 14v20l20 10 20-10V14L24 4z" />
-                        <path d="M4 14l20 10 20-10" />
-                        <path d="M24 24v20" />
-                    </svg>
-                    <h3 class="service-name">Gestão de Tráfego Pago</h3>
-                    <p class="service-desc">Meta Ads e Google Ads gerenciados com foco em retorno real. Você
-                        sabe exatamente quanto investiu e quantos clientes chegaram.</p>
-                </div>
-            </div>
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <canvas id="heroCanvas" class="hero__canvas"></canvas>
+    <div class="hero__grid"></div>
+    <div class="container">
+      <div class="hero__content reveal">
+<div class="hero__badge">
+          <span>Tecnologia & Soluções Digitais</span>
         </div>
-    </section>
-    <div class="metallic-separator"></div>
-    <section class="how-it-works" id="como-funciona">
-        <div class="section-inner">
-            <div class="reveal">
-                <h2 class="section-title">Do diagnóstico ao resultado</h2>
-            </div>
-            <div class="steps-container">
-                <div class="step reveal">
-                    <div class="step-number metallic-text">01</div>
-                    <div class="step-content">
-                        <h3 class="step-title">Você solicita o diagnóstico</h3>
-                        <p class="step-desc">Preenche o formulário ou manda mensagem no WhatsApp. Leva 30 segundos.</p>
-                    </div>
-                </div>
-                <div class="step-divider"></div>
-                <div class="step reveal">
-                    <div class="step-number metallic-text">02</div>
-                    <div class="step-content">
-                        <h3 class="step-title">Nós te chamamos em até 24h</h3>
-                        <p class="step-desc">Entendemos seu negócio, mapeamos os gargalos e apresentamos o que faz
-                            sentido para você.</p>
-                    </div>
-                </div>
-                <div class="step-divider"></div>
-                <div class="step reveal">
-                    <div class="step-number metallic-text">03</div>
-                    <div class="step-content">
-                        <h3 class="step-title">Execução com resultado medido</h3>
-                        <p class="step-desc">Estratégia personalizada, execução com prazo definido e relatório claro.
-                            Você acompanha tudo.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="diagnosis-box reveal">
-                <h4 class="diagnosis-title">O que o diagnóstico inclui:</h4>
-                <ul class="diagnosis-list">
-                    <li>Análise da sua presença digital atual</li>
-                    <li>Identificação dos principais gargalos</li>
-                    <li>Plano dos próximos 60 dias</li>
-                    <li>Sem custo, sem compromisso</li>
-                </ul>
-            </div>
+        <h1 class="hero__title">
+          <span>Transformamos desafios</span>
+          <span>de negócio em <span class="highlight">soluções digitais.</span></span>
+        </h1>
+        <p class="hero__subtitle">
+          Tecnologia, inteligência artificial, automação, sistemas e estratégias digitais desenvolvidos para transformar a forma como sua empresa opera, vende e cresce.
+        </p>
+        <div class="hero__ctas">
+          <a href="contato.html" class="btn btn-primary btn-lg">Quero uma solução</a>
+          <a href="empresa.html" class="btn btn-secondary btn-lg">Conheça a NexTep</a>
         </div>
-    </section>
-    <div class="metallic-separator"></div>
-    <section class="social-proof" id="resultados">
-        <div class="section-inner">
-            <div class="reveal">
-                <h2 class="section-title">Resultados reais de clientes reais</h2>
-                <p class="section-subtitle">Não é promessa de marketing. É o que acontece quando estratégia e execução
-                    andam juntas.</p>
-            </div>
-            <div class="testimonials-carousel-wrapper">
-                <div class="testimonials-track" id="testimonialsTrack">
-                    <!-- Card 1 -->
-                    <div class="testimonial-card">
-                        <div class="testimonial-avatar">VO</div>
-                        <p class="testimonial-text">"O tráfego pago da Nextep deu um salto gigante no nosso negócio aqui
-                            em
-                            Ipatinga. O volume de vendas aumentou de forma absurda, tanto no online quanto na loja
-                            física.
-                            Superou todas as expectativas!"</p>
-                        <div class="testimonial-name">Loja de Roupas</div>
-                        <div class="testimonial-business">Ipatinga - MG</div>
-                    </div>
-                    <!-- Card 2 -->
-                    <div class="testimonial-card">
-                        <div class="testimonial-avatar">NR</div>
-                        <p class="testimonial-text">"O bot automatizou todo o nosso atendimento na época mais
-                            movimentada do
-                            ano. Rodou tudo tão perfeito e sozinho que nem precisamos contratar secretária para dar
-                            conta
-                            das mensagens."</p>
-                        <div class="testimonial-name">Aluguel de Roupas Juninas</div>
-                        <div class="testimonial-business">Ipatinga - MG</div>
-                    </div>
-                    <!-- Card 3 -->
-                    <div class="testimonial-card">
-                        <div class="testimonial-avatar">CS</div>
-                        <p class="testimonial-text">"O agente de IA resolve quase tudo sozinho, desde tirar dúvidas até
-                            agendar consultas. Reduziu tanto o gargalo que não precisamos mais de secretária dedicada
-                            para o
-                            telefone."</p>
-                        <div class="testimonial-name">Clínica Cardiovascular</div>
-                        <div class="testimonial-business">Coronel Fabriciano</div>
-                    </div>
-                    <!-- Card 4 -->
-                    <div class="testimonial-card">
-                        <div class="testimonial-avatar">FI</div>
-                        <p class="testimonial-text">"A entrega da IA junto com o CRM automatizou completamente nossa
-                            gestão
-                            de clientes. O atendimento ficou instantâneo, os leads chegam organizados e o processo ficou
-                            100% profissional."</p>
-                        <div class="testimonial-name">Imobiliária</div>
-                        <div class="testimonial-business">São Paulo - SP</div>
-                    </div>
-                    <!-- Card 5 -->
-                    <div class="testimonial-card">
-                        <div class="testimonial-avatar">FL</div>
-                        <p class="testimonial-text">"O sistema de atendimento deles preencheu nossa agenda de avaliações
-                            como nunca tínhamos visto. A automação confirmava as consultas sozinha e reduziu as faltas
-                            dos
-                            pacientes quase a zero."</p>
-                        <div class="testimonial-name">Clínica Odontológica</div>
-                        <div class="testimonial-business">Timóteo - MG</div>
-                    </div>
-                    <!-- Card 6 -->
-                    <div class="testimonial-card">
-                        <div class="testimonial-avatar">LG</div>
-                        <p class="testimonial-text">"A IA mudou meu jogo no mercado imobiliário. Ela responde os leads
-                            de
-                            madrugada, qualifica quem realmente tem dinheiro para comprar e deixa o cliente pronto só
-                            para
-                            eu agendar a visita. Não perco mais nenhuma venda."</p>
-                        <div class="testimonial-name">Corretor de Imóveis</div>
-                        <div class="testimonial-business">Curitiba - PR</div>
-                    </div>
-                    <!-- Cópias para loop infinito -->
-                    <div class="testimonial-card">
-                        <div class="testimonial-avatar">VO</div>
-                        <p class="testimonial-text">"O tráfego pago da Nextep deu um salto gigante no nosso negócio aqui
-                            em
-                            Ipatinga. O volume de vendas aumentou de forma absurda, tanto no online quanto na loja
-                            física.
-                            Superou todas as expectativas!"</p>
-                        <div class="testimonial-name">Loja de Roupas</div>
-                        <div class="testimonial-business">Ipatinga - MG</div>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="testimonial-avatar">NR</div>
-                        <p class="testimonial-text">"O bot automatizou todo o nosso atendimento na época mais
-                            movimentada do
-                            ano. Rodou tudo tão perfeito e sozinho que nem precisamos contratar secretária para dar
-                            conta
-                            das mensagens."</p>
-                        <div class="testimonial-name">Aluguel de Roupas Juninas</div>
-                        <div class="testimonial-business">Ipatinga - MG</div>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="testimonial-avatar">CS</div>
-                        <p class="testimonial-text">"O agente de IA resolve quase tudo sozinho, desde tirar dúvidas até
-                            agendar consultas. Reduziu tanto o gargalo que não precisamos mais de secretária dedicada
-                            para o
-                            telefone."</p>
-                        <div class="testimonial-name">Clínica Cardiovascular</div>
-                        <div class="testimonial-business">Coronel Fabriciano</div>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="testimonial-avatar">FI</div>
-                        <p class="testimonial-text">"A entrega da IA junto com o CRM automatizou completamente nossa
-                            gestão
-                            de clientes. O atendimento ficou instantâneo, os leads chegam organizados e o processo ficou
-                            100% profissional."</p>
-                        <div class="testimonial-name">Imobiliária</div>
-                        <div class="testimonial-business">São Paulo - SP</div>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="testimonial-avatar">FL</div>
-                        <p class="testimonial-text">"O sistema de atendimento deles preencheu nossa agenda de avaliações
-                            como nunca tínhamos visto. A automação confirmava as consultas sozinha e reduziu as faltas
-                            dos
-                            pacientes quase a zero."</p>
-                        <div class="testimonial-name">Clínica Odontológica</div>
-                        <div class="testimonial-business">Timóteo - MG</div>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="testimonial-avatar">LG</div>
-                        <p class="testimonial-text">"A IA mudou meu jogo no mercado imobiliário. Ela responde os leads
-                            de
-                            madrugada, qualifica quem realmente tem dinheiro para comprar e deixa o cliente pronto só
-                            para
-                            eu agendar a visita. Não perco mais nenhuma venda."</p>
-                        <div class="testimonial-name">Corretor de Imóveis</div>
-                        <div class="testimonial-business">Curitiba - PR</div>
-                    </div>
-                </div>
-            </div>
-            <div class="social-proof-cta reveal">
-                <p>O próximo caso pode ser o seu.</p>
-                <a href="#diagnostico" class="btn-primary">Quero meu diagnóstico</a>
-            </div>
+      </div>
+    </div>
+</section>
+
+<!-- ===== TRUST BAR ===== -->
+  <section class="trust-bar">
+    <div class="container">
+      <div class="trust-bar__inner reveal-stagger">
+        <div class="trust-item">
+          <div class="trust-item__number" data-count="30" data-suffix="+">0+</div>
+          <div class="trust-item__label">empresas atendidas</div>
         </div>
-    </section>
-    <div class="metallic-separator"></div>
-    <section class="about" id="sobre">
-        <div class="section-inner">
-            <div class="reveal">
-                <h2 class="section-title">Quem está por trás da Nextep</h2>
-            </div>
-            <div class="about-grid reveal-stagger">
-                <div class="about-card">
-                    <div class="about-avatar"><span class="about-avatar-text">FN</span></div>
-                    <h3 class="about-name">Filipe Nogueira</h3>
-                    <p class="about-role">CEO & Estratégia</p>
-                    <p class="about-bio">Mais de 2 anos gerenciando tráfego pago para empresas de todos os tamanhos.
-                        Fundou a Nextep porque cansou de ver pequenos negócios sendo
-                        enganados por agências que prometem o mundo e entregam planilhas. Hoje, atua estritamente na
-                        gestão e direcionamento estratégico da estrutura da empresa, validando o sucesso do método com
-                        mais de 50 clientes satisfeitos. Acredita que marketing de verdade é matemática, não mágica.
-                </div>
-                <div class="about-card">
-                    <div class="about-avatar"><span class="about-avatar-text">TP</span></div>
-                    <h3 class="about-name">Tiago Pereira</h3>
-                    <p class="about-role">Co-fundador & Marketing</p>
-                    <p class="about-bio">Co-fundador da Nextep, atua há 1 ano na gestão de marketing da agência e soma 3
-                        anos de experiência na área, com um histórico de mais de 35 clientes ativos e qualificados.
-                        Entrou inicialmente prestando suporte estratégico e, pelo impacto gerado, tornou-se sócio.
-                        Especialista em automação, ele liderou a implementação do primeiro agente de IA da Nextep.
-                        Acredita que tecnologia só vale quando resolve um problema real.
-                </div>
-            </div>
-            <p class="about-quote reveal">"Criamos a Nextep porque acreditamos que todo negócio merece crescer com
-                estratégia — não só com sorte."</p>
+        <div class="trust-item">
+          <div class="trust-item__number" data-count="6" data-suffix="+">0+</div>
+          <div class="trust-item__label">estados atendidos</div>
         </div>
-    </section>
-    <div class="metallic-separator"></div>
-    <section class="faq" id="faq">
-        <div class="section-inner">
-            <div class="reveal">
-                <h2 class="section-title">Perguntas que outros clientes fizeram antes</h2>
-            </div>
-            <div class="faq-list reveal-stagger">
-                <div class="faq-item">
-                    <button class="faq-question">Quanto custa contratar a Nextep?<span class="faq-icon"></span></button>
-                    <div class="faq-answer">
-                        <p>Cada projeto é orçado individualmente após o diagnóstico. Não trabalhamos com pacote único
-                            porque cada negócio tem uma realidade diferente. O diagnóstico gratuito serve justamente
-                            para entender o que você precisa e apresentar um investimento que faça sentido para o seu
-                            estágio.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question">Em quanto tempo vejo resultado?<span class="faq-icon"></span></button>
-                    <div class="faq-answer">
-                        <p>Os primeiros resultados de tráfego aparecem entre 15 e 30 dias. Resultados consistentes a
-                            partir de 60 dias de operação. Landing pages geralmente convertem desde o primeiro dia de
-                            tráfego. O agente de IA começa a qualificar leads imediatamente após a configuração.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question">Preciso ter site para contratar vocês?<span
-                            class="faq-icon"></span></button>
-                    <div class="faq-answer">
-                        <p>Não. Criamos do zero se necessário — landing page faz parte dos nossos serviços. Muitos dos
-                            nossos clientes começam sem nenhuma presença digital e construímos tudo junto com a
-                            estratégia de tráfego.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question">O agente de IA substitui minha equipe de atendimento?<span
-                            class="faq-icon"></span></button>
-                    <div class="faq-answer">
-                        <p>Não substitui — potencializa. O agente cuida dos primeiros contatos e qualificações para que
-                            sua equipe foque em fechar negócio. Ele funciona 24/7, nunca tira férias e nunca perde um
-                            lead. Sua equipe ganha tempo para o que realmente importa: converter.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question">Como funciona o diagnóstico gratuito?<span
-                            class="faq-icon"></span></button>
-                    <div class="faq-answer">
-                        <p>É uma conversa de 30 a 45 minutos onde mapeamos sua situação atual, identificamos os gargalos
-                            e apresentamos o que faz sentido para o seu negócio. Sem pressão, sem venda forçada. Você
-                            recebe um documento com análise e plano de ação — mesmo que não feche conosco.</p>
-                    </div>
-                </div>
-            </div>
+        <div class="trust-item">
+          <div class="trust-item__number" data-count="100" data-suffix="%">0%</div>
+          <div class="trust-item__label">projetos entregues</div>
         </div>
-    </section>
-    <div class="metallic-separator"></div>
-    <section class="cta-final" id="diagnostico">
-        <div class="section-inner reveal">
-            <h2 class="cta-final-title">Pronto para dar o próximo passo?</h2>
-            <p class="cta-final-subtitle">Diagnóstico gratuito. Sem compromisso. Resposta em até 24 horas.</p>
-            <a href="https://wa.me/5531999657698" class="btn-primary" target="_blank">Solicitar Diagnóstico Gratuito</a>
+        <div class="trust-item">
+          <div class="trust-item__number">24h</div>
+          <div class="trust-item__label">resposta garantida</div>
         </div>
-    </section>
-    <footer class="footer" id="contato">
-        <div class="metallic-separator" style="position:absolute;top:0;left:0"></div>
-        <div class="footer-grid">
-            <div class="footer-col">
-                <a href="#" class="logo">NEXTE<span class="logo-symbol">P</span></a>
-                <p class="footer-desc">Agência de marketing digital e inteligência artificial para empresas que querem
-                    crescer com estratégia.</p>
-            </div>
-            <div class="footer-col">
-                <h4 class="footer-col-title">Serviços</h4>
-                <ul class="footer-links">
-                    <li><a href="#servicos">Tráfego Pago</a></li>
-                    <li><a href="#servicos">Landing Pages</a></li>
-                    <li><a href="#servicos">Agente de IA</a></li>
-                    <li><a href="#servicos">Geração de Leads</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4 class="footer-col-title">Empresa</h4>
-                <ul class="footer-links">
-                    <li><a href="#sobre">Sobre nós</a></li>
-                    <li><a href="#como-funciona">Como funciona</a></li>
-                    <li><a href="#faq">FAQ</a></li>
-                    <li><a href="#diagnostico">Diagnóstico gratuito</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4 class="footer-col-title">Contato</h4>
-                <div class="footer-contact-item">
-                    <svg viewBox="0 0 24 24">
-                        <path
-                            d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
-                    </svg>
-                    <span>WhatsApp Suporte: (31) 99965-7698</span>
-                </div>
-                <div class="footer-contact-item">
-                    <svg viewBox="0 0 24 24">
-                        <path
-                            d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
-                    </svg>
-                    <span>WhatsApp Vendedor: (31) 98642-9590</span>
-                </div>
-                <div class="footer-contact-item">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                        <polyline points="22,6 12,13 2,6" />
-                    </svg>
-                    <span>nextep.solutionsorg@gmail.com</span>
-                </div>
-                <div class="footer-contact-item">
-                    <svg viewBox="0 0 24 24">
-                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-                    </svg>
-                    <span>@nextep.solutions</span>
-                </div>
-                <div class="footer-contact-item">
-                    <svg viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="10" />
-                        <polyline points="12 6 12 12 16 14" />
-                    </svg>
-                    <span>Domingo à Domingo, 24h</span>
-                </div>
-            </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CLIENTS CAROUSEL ===== -->
+  <section class="clients-bar">
+    <div class="container">
+      <p class="clients-bar__label">Empresas que já confiam na NexTep</p>
+    </div>
+    <div class="clients-track">
+      <div class="client-logo">
+        <div class="client-logo__icon">CP</div>
+        <span class="client-logo__name">Colchões Polar</span>
+      </div>
+      <div class="client-logo">
+        <div class="client-logo__icon">AF</div>
+        <span class="client-logo__name">Allp Fit Academia</span>
+      </div>
+      <div class="client-logo">
+        <div class="client-logo__icon">HA</div>
+        <span class="client-logo__name">Heloísa Agência</span>
+      </div>
+      <div class="client-logo">
+        <div class="client-logo__icon">NX</div>
+        <span class="client-logo__name">NexTep Bot Manager</span>
+      </div>
+      <div class="client-logo">
+        <div class="client-logo__icon">SA</div>
+        <span class="client-logo__name">Socorro Alfa</span>
+      </div>
+      <div class="client-logo">
+        <div class="client-logo__icon">FB</div>
+        <span class="client-logo__name">Fabreez Co</span>
+      </div>
+      <!-- Duplicados para loop infinito -->
+      <div class="client-logo">
+        <div class="client-logo__icon">CP</div>
+        <span class="client-logo__name">Colchões Polar</span>
+      </div>
+      <div class="client-logo">
+        <div class="client-logo__icon">AF</div>
+        <span class="client-logo__name">Allp Fit Academia</span>
+      </div>
+      <div class="client-logo">
+        <div class="client-logo__icon">HA</div>
+        <span class="client-logo__name">Heloísa Agência</span>
+      </div>
+      <div class="client-logo">
+        <div class="client-logo__icon">NX</div>
+        <span class="client-logo__name">NexTep Bot Manager</span>
+      </div>
+      <div class="client-logo">
+        <div class="client-logo__icon">SA</div>
+        <span class="client-logo__name">Socorro Alfa</span>
+      </div>
+      <div class="client-logo">
+        <div class="client-logo__icon">FB</div>
+        <span class="client-logo__name">Fabreez Co</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PHILOSOPHY ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header section-header--center reveal">
+        <div class="section-header__label">Nossa filosofia</div>
+        <h2 class="section-header__title">Tecnologia só faz sentido quando resolve problemas reais.</h2>
+        <p class="section-header__desc">
+          A NexTep combina tecnologia, estratégia e automação para desenvolver soluções que realmente fazem diferença na operação de cada empresa. Em vez de oferecer apenas ferramentas prontas, buscamos entender o contexto, identificar oportunidades e construir a estrutura adequada para cada necessidade.
+        </p>
+      </div>
+<div class="grid-4">
+        <div class="card text-center">
+          <div class="card__icon mx-auto">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+          </div>
+          <h4 class="card__title">Entender</h4>
+          <p class="card__text">Compreendemos o negócio e seus desafios.</p>
         </div>
-        <div class="footer-bottom">
-            <div class="footer-bottom-left">Nextep Digital Solutions</div>
-            <div class="footer-bottom-center">© 2025 Nextep Solutions. Todos os direitos reservados.</div>
-            <div class="footer-bottom-right">
-                <a href="#">Política de Privacidade</a>
-                <a href="#">Termos de Uso</a>
-            </div>
+        <div class="card text-center">
+          <div class="card__icon mx-auto">
+            <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <h4 class="card__title">Planejar</h4>
+          <p class="card__text">Definimos a melhor estratégia tecnológica.</p>
         </div>
-    </footer>
-    <script src="script.js"></script>
+        <div class="card text-center">
+          <div class="card__icon mx-auto">
+            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <h4 class="card__title">Construir</h4>
+          <p class="card__text">Desenvolvemos a solução completa.</p>
+        </div>
+        <div class="card text-center">
+          <div class="card__icon mx-auto">
+            <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <h4 class="card__title">Evoluir</h4>
+          <p class="card__text">Acompanhamos, otimizamos e expandimos.</p>
+        </div>
+      </div>
+</div>
+  </section>
+
+  <div class="separator"></div>
+
+  <!-- ===== SOLUTIONS OVERVIEW ===== -->
+  <section class="section section--dark" id="solucoes">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-header__label">Soluções</div>
+        <h2 class="section-header__title">Ecossistema completo de soluções digitais</h2>
+        <p class="section-header__desc">Cada empresa possui necessidades diferentes. A NexTep desenvolve a solução adequada para cada desafio.</p>
+      </div>
+      <div class="grid-4">
+        <a href="solucoes.html" class="card">
+          <div class="card__icon">
+            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <h4 class="card__title">Desenvolvimento Web</h4>
+          <p class="card__text">Sites institucionais, landing pages, plataformas e experiências digitais modernas.</p>
+          <span class="card__link">Saiba mais →</span>
+        </a>
+        <a href="solucoes.html" class="card">
+          <div class="card__icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <h4 class="card__title">Sistemas e Plataformas</h4>
+          <p class="card__text">Sistemas internos, plataformas web, painéis administrativos e aplicações personalizadas.</p>
+          <span class="card__link">Saiba mais →</span>
+        </a>
+        <a href="solucoes.html" class="card">
+          <div class="card__icon">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h4 class="card__title">CRM</h4>
+          <p class="card__text">Estruturas para gestão de clientes, leads, equipes, processos e vendas.</p>
+          <span class="card__link">Saiba mais →</span>
+        </a>
+        <a href="solucoes.html" class="card">
+          <div class="card__icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <h4 class="card__title">Inteligência Artificial</h4>
+          <p class="card__text">Agentes de IA, assistentes inteligentes, automação de atendimento e soluções personalizadas.</p>
+          <span class="card__link">Saiba mais →</span>
+        </a>
+      </div>
+      <div class="text-center" style="margin-top:48px">
+        <a href="solucoes.html" class="btn btn-secondary">Ver todas as soluções</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BOT MANAGER SHOWCASE ===== -->
+  <section class="section showcase">
+    <div class="container">
+      <div class="showcase__grid">
+        <div class="reveal-left">
+          <div class="section-header__label">Tecnologia própria</div>
+          <h2 style="margin-bottom:16px">NexTep Bot Manager</h2>
+          <p style="margin-bottom:16px">Plataforma completa para gerenciamento de atendimento, CRM, agentes de IA, usuários, setores, contatos, automações e relatórios.</p>
+          <p style="margin-bottom:24px">Uma solução desenvolvida pela NexTep para empresas que precisam centralizar e automatizar seu atendimento de ponta a ponta.</p>
+          <div class="bot-highlight" style="margin-bottom:32px">
+            <div class="bot-highlight__badge">Produto próprio</div>
+            <p style="font-size:0.9375rem;margin-bottom:16px">O Bot Manager é uma plataforma SaaS multi-tenant que reúne dashboard, gestão de contatos, atendimento, agentes de IA, setores, fluxos do bot, atalhos, disparos, permissões, relatórios, auditoria, CRM, automações e integrações — tudo em um só lugar.</p>
+          </div>
+          <a href="../Landing Page - Nextep Bot Manager/index.html" class="btn btn-primary" target="_blank">Conheça o NexTep Bot Manager</a>
+        </div>
+        <div class="reveal-right">
+          <div class="showcase__preview">
+            <div class="showcase__preview-dots">
+              <span class="showcase__preview-dot"></span>
+              <span class="showcase__preview-dot"></span>
+              <span class="showcase__preview-dot"></span>
+            </div>
+            <div style="padding-top:48px">
+              <div class="showcase__features">
+                <div class="showcase__feature">
+                  <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+                  Dashboard
+                </div>
+                <div class="showcase__feature">
+                  <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                  Contatos
+                </div>
+                <div class="showcase__feature">
+                  <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/><path d="M12 6v6l4 2"/></svg>
+                  Agentes de IA
+                </div>
+                <div class="showcase__feature">
+                  <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                  Automações
+                </div>
+                <div class="showcase__feature">
+                  <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  Relatórios
+                </div>
+                <div class="showcase__feature">
+                  <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                  Permissões
+                </div>
+                <div class="showcase__feature">
+                  <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                  WhatsApp
+                </div>
+                <div class="showcase__feature">
+                  <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                  Integrações
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== HOW WE WORK ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-header__label">Processo</div>
+        <h2 class="section-header__title">Como trabalhamos</h2>
+        <p class="section-header__desc">Projetos digitais não terminam quando entram no ar. Eles evoluem junto com o negócio.</p>
+      </div>
+      <div class="steps reveal">
+        <div class="step">
+          <div class="step__number"></div>
+          <div class="step__content">
+            <h3 class="step__title">Diagnóstico</h3>
+            <p class="step__text">Entendemos o negócio, o problema e os objetivos.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step__number"></div>
+          <div class="step__content">
+            <h3 class="step__title">Estratégia</h3>
+            <p class="step__text">Definimos a melhor abordagem tecnológica.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step__number"></div>
+          <div class="step__content">
+            <h3 class="step__title">Desenvolvimento</h3>
+            <p class="step__text">Construímos a solução utilizando tecnologias adequadas ao projeto.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step__number"></div>
+          <div class="step__content">
+            <h3 class="step__title">Implementação</h3>
+            <p class="step__text">Colocamos a solução em funcionamento e realizamos integrações e configurações.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step__number"></div>
+          <div class="step__content">
+            <h3 class="step__title">Evolução</h3>
+            <p class="step__text">Acompanhamos os resultados e identificamos novas possibilidades de melhoria.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="separator"></div>
+
+  <!-- ===== TECHNOLOGIES ===== -->
+  <section class="section section--dark">
+    <div class="container">
+      <div class="section-header section-header--center reveal">
+        <div class="section-header__label">Tecnologia</div>
+        <h2 class="section-header__title">Ecossistema tecnológico</h2>
+        <p class="section-header__desc">Utilizamos as melhores tecnologias para construir soluções robustas, escaláveis e modernas.</p>
+      </div>
+      <div class="grid-4 reveal-stagger" style="max-width:900px;margin:0 auto">
+        <div class="card text-center" style="padding:24px">
+          <h4 class="card__title" style="font-size:0.9375rem;margin-bottom:4px">React</h4>
+          <p class="card__text" style="font-size:0.8125rem">Frontend</p>
+        </div>
+        <div class="card text-center" style="padding:24px">
+          <h4 class="card__title" style="font-size:0.9375rem;margin-bottom:4px">Node.js</h4>
+          <p class="card__text" style="font-size:0.8125rem">Backend</p>
+        </div>
+        <div class="card text-center" style="padding:24px">
+          <h4 class="card__title" style="font-size:0.9375rem;margin-bottom:4px">Python</h4>
+          <p class="card__text" style="font-size:0.8125rem">Automação & IA</p>
+        </div>
+        <div class="card text-center" style="padding:24px">
+          <h4 class="card__title" style="font-size:0.9375rem;margin-bottom:4px">PostgreSQL</h4>
+          <p class="card__text" style="font-size:0.8125rem">Banco de dados</p>
+        </div>
+        <div class="card text-center" style="padding:24px">
+          <h4 class="card__title" style="font-size:0.9375rem;margin-bottom:4px">Supabase</h4>
+          <p class="card__text" style="font-size:0.8125rem">Backend-as-a-Service</p>
+        </div>
+        <div class="card text-center" style="padding:24px">
+          <h4 class="card__title" style="font-size:0.9375rem;margin-bottom:4px">n8n</h4>
+          <p class="card__text" style="font-size:0.8125rem">Automação</p>
+        </div>
+        <div class="card text-center" style="padding:24px">
+          <h4 class="card__title" style="font-size:0.9375rem;margin-bottom:4px">OpenAI</h4>
+          <p class="card__text" style="font-size:0.8125rem">Inteligência Artificial</p>
+        </div>
+        <div class="card text-center" style="padding:24px">
+          <h4 class="card__title" style="font-size:0.9375rem;margin-bottom:4px">Docker</h4>
+          <p class="card__text" style="font-size:0.8125rem">Infraestrutura</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOR BUSINESSES ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="grid" style="grid-template-columns:1fr 1fr;gap:64px;align-items:center">
+        <div class="reveal-left">
+          <div class="section-header__label">Para empresas</div>
+          <h2 style="margin-bottom:16px">Uma única parceira para diferentes desafios digitais.</h2>
+          <p style="margin-bottom:24px">Uma empresa pode contratar diferentes soluções conforme sua necessidade. As soluções podem funcionar de maneira integrada, criando um ecossistema completo.</p>
+          <a href="contato.html" class="btn btn-primary">Quero estruturar minha operação digital</a>
+        </div>
+        <div class="reveal-right">
+          <div class="flow">
+            <div class="flow__item">Presença digital</div>
+            <div class="flow__arrow"></div>
+            <div class="flow__item">Landing page</div>
+            <div class="flow__arrow"></div>
+            <div class="flow__item">Tráfego</div>
+            <div class="flow__arrow"></div>
+            <div class="flow__item">Captação de leads</div>
+            <div class="flow__arrow"></div>
+            <div class="flow__item">WhatsApp & IA</div>
+            <div class="flow__arrow"></div>
+            <div class="flow__item">CRM & Automação</div>
+            <div class="flow__arrow"></div>
+            <div class="flow__item">Dados e gestão</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="separator"></div>
+
+  <!-- ===== FAQ ===== -->
+  <section class="section section--dark">
+    <div class="container">
+      <div class="section-header section-header--center reveal">
+        <div class="section-header__label">Dúvidas</div>
+        <h2 class="section-header__title">Perguntas frequentes</h2>
+      </div>
+      <div class="faq reveal-stagger">
+        <div class="faq-item">
+          <button class="faq-question">Quanto custa contratar a NexTep?<span class="faq-icon"></span></button>
+          <div class="faq-answer">
+            <p>Cada projeto é orçado individualmente após o diagnóstico. Não trabalhamos com pacote único porque cada negócio tem uma realidade diferente. O diagnóstico serve justamente para entender o que você precisa e apresentar um investimento que faça sentido.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">A NexTep desenvolve apenas sites?<span class="faq-icon"></span></button>
+          <div class="faq-answer">
+            <p>Não. A NexTep é uma empresa de tecnologia e soluções digitais. Desenvolvemos desde landing pages até sistemas completos, CRMs, automações, agentes de IA, integrações e plataformas personalizadas.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Em quanto tempo vejo resultado?<span class="faq-icon"></span></button>
+          <div class="faq-answer">
+            <p>O prazo varia conforme a solução. Landing pages podem ser entregues em dias. Sistemas mais complexos levam semanas. O importante é que cada projeto possui prazo definido após o diagnóstico.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">A NexTep trabalha com empresas de pequeno porte?<span class="faq-icon"></span></button>
+          <div class="faq-answer">
+            <p>Sim. Atendemos empresas de diferentes portes e segmentos. Cada solução é personalizada conforme a necessidade e realidade de cada negócio.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Como funciona o processo de desenvolvimento?<span class="faq-icon"></span></button>
+          <div class="faq-answer">
+            <p>O processo começa com um diagnóstico para entender o problema. Em seguida, definimos a estratégia, desenvolvemos a solução, implementamos e acompanhamos a evolução.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA FINAL ===== -->
+  <section class="cta-section">
+    <div class="container reveal">
+      <h2 class="cta-section__title">Sua próxima solução pode começar aqui.</h2>
+      <p class="cta-section__text">Conte para a NexTep o que você precisa. Nós ajudaremos a encontrar a melhor forma de construir.</p>
+      <a href="contato.html" class="btn btn-primary btn-lg">Falar com a NexTep</a>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <a href="index.html" class="footer__logo">
+            <img src="../Logos - Imagens/Nextep/Logo Reduzida Branca.png" alt="NexTep Solutions" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <span style="display:none">NEXTEP</span>
+          </a>
+          <p class="footer__brand-desc">Tecnologia, automação e soluções digitais para empresas que querem evoluir.</p>
+        </div>
+        <div>
+          <h4 class="footer__title">NexTep</h4>
+          <ul class="footer__links">
+            <li><a href="empresa.html">Sobre</a></li>
+            <li><a href="projetos.html">Projetos</a></li>
+            <li><a href="solucoes.html">Soluções</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer__title">Soluções</h4>
+          <ul class="footer__links">
+            <li><a href="solucoes.html">Desenvolvimento</a></li>
+            <li><a href="solucoes.html">CRM</a></li>
+            <li><a href="solucoes.html">IA</a></li>
+            <li><a href="solucoes.html">Automação</a></li>
+            <li><a href="solucoes.html">Marketing</a></li>
+            <li><a href="solucoes.html">Integrações</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer__title">Empresa</h4>
+          <ul class="footer__links">
+            <li><a href="empresa.html">Sobre nós</a></li>
+            <li><a href="carreiras.html">Carreiras</a></li>
+            <li><a href="parcerias.html">Parcerias</a></li>
+            <li><a href="contato.html">Contato</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer__title">Contato</h4>
+          <div class="footer__contact-item">
+            <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            <span>WhatsApp: (31) 99965-7698</span>
+          </div>
+          <div class="footer__contact-item">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <span>nextep.solutionsorg@gmail.com</span>
+          </div>
+          <div class="footer__contact-item">
+            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            <span>@nextep.solutions</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <div class="footer__copy">&copy; 2026 NexTep Solutions. Todos os direitos reservados.</div>
+        <div class="footer__bottom-links">
+          <a href="politica-de-privacidade.html">Política de Privacidade</a>
+          <a href="termos-de-uso.html">Termos de Uso</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
-
 </html>

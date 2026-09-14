@@ -1,0 +1,244 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contato — Solicite um projeto | NexTep Solutions</title>
+  <meta name="description" content="Tem um desafio? Vamos conversar. Conte o que sua empresa precisa e a NexTep encontrará a melhor solução.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://nextepsolutions.com.br/contato">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nextepsolutions.com.br/contato">
+  <meta property="og:title" content="Contato — NexTep Solutions">
+  <meta property="og:description" content="Tem um desafio? Vamos conversar.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="header" id="header">
+    <div class="header__inner">
+      <a href="index.html" class="header__logo">
+        <img src="../Logos - Imagens/Nextep/Logo Reduzida Branca.png" alt="NexTep Solutions" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <span class="header__logo-text" style="display:none">NEXTEP</span>
+      </a>
+      <nav class="header__nav">
+        <a href="index.html">Início</a>
+        <a href="empresa.html">A NexTep</a>
+        <a href="solucoes.html">Soluções</a>
+        <a href="projetos.html">Projetos</a>
+        <a href="parcerias.html">Parcerias</a>
+        <a href="carreiras.html">Carreiras</a>
+        <a href="contato.html" class="active">Contato</a>
+      </nav>
+      <div class="header__actions">
+        <a href="contato.html" class="header__cta">Solicitar projeto</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.html">Início</a>
+    <a href="empresa.html">A NexTep</a>
+    <a href="solucoes.html">Soluções</a>
+    <a href="projetos.html">Projetos</a>
+    <a href="parcerias.html">Parcerias</a>
+    <a href="carreiras.html">Carreiras</a>
+    <a href="contato.html">Contato</a>
+    <a href="contato.html" class="btn btn-primary">Solicitar projeto</a>
+  </div>
+
+  <section class="page-header">
+    <div class="container">
+      <div class="page-header__label">Contato</div>
+      <h1 class="page-header__title">Tem um desafio? Vamos conversar.</h1>
+      <p class="page-header__desc">Conte o que sua empresa precisa e nossa equipe analisará a melhor forma de transformar sua necessidade em uma solução.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="contato-layout">
+        <div class="contato-layout__form reveal-up">
+          <form data-type="contact">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Nome *</label>
+                <input type="text" class="form-input" name="nome" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Empresa</label>
+                <input type="text" class="form-input" name="empresa">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">E-mail *</label>
+                <input type="email" class="form-input" name="email" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">WhatsApp</label>
+                <input type="tel" class="form-input" name="whatsapp">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Segmento</label>
+                <input type="text" class="form-input" name="segmento" placeholder="Ex: Saúde, E-commerce, Imobiliária...">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Serviço de interesse *</label>
+                <select class="form-select" name="servico" required>
+                  <option value="">Selecione</option>
+                  <option>Site</option>
+                  <option>Landing Page</option>
+                  <option>Sistema</option>
+                  <option>Aplicativo</option>
+                  <option>CRM</option>
+                  <option>Inteligência Artificial</option>
+                  <option>Automação</option>
+                  <option>WhatsApp</option>
+                  <option>Marketing</option>
+                  <option>Tráfego Pago</option>
+                  <option>Integração</option>
+                  <option>Outro</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Orçamento aproximado (opcional)</label>
+                <select class="form-select" name="orcamento">
+                  <option value="">Selecione</option>
+                  <option>Até R$ 2.000</option>
+                  <option>R$ 2.000 — R$ 5.000</option>
+                  <option>R$ 5.000 — R$ 15.000</option>
+                  <option>R$ 15.000 — R$ 50.000</option>
+                  <option>Acima de R$ 50.000</option>
+                  <option>A definir</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Prazo desejado</label>
+                <select class="form-select" name="prazo">
+                  <option value="">Selecione</option>
+                  <option>Urgente</option>
+                  <option>Até 15 dias</option>
+                  <option>Até 30 dias</option>
+                  <option>Até 60 dias</option>
+                  <option>Sem urgência</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Descrição do projeto *</label>
+              <textarea class="form-textarea" name="descricao" required placeholder="Descreva o que sua empresa precisa..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg" style="width:100%">Solicitar contato</button>
+          </form>
+        </div>
+        <div class="contato-layout__sidebar">
+          <div class="card contato-sidebar__horario reveal-up">
+            <h4 class="card__title" style="margin-bottom:12px">Horário de atendimento</h4>
+            <p class="card__text">Domingo a domingo, 24 horas.</p>
+            <p class="card__text" style="margin-top:8px">Respondemos em até 24 horas.</p>
+          </div>
+          <div class="card contato-sidebar__canais reveal-up">
+            <h4 class="card__title" style="margin-bottom:20px">Canais de contato</h4>
+            <div class="footer__contact-item" style="margin-bottom:16px">
+              <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+              <div>
+                <div style="font-weight:600;color:var(--text-primary)">WhatsApp</div>
+                <span>Clique para conversar</span>
+              </div>
+            </div>
+            <div class="footer__contact-item" style="margin-bottom:16px">
+              <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <div>
+                <div style="font-weight:600;color:var(--text-primary)">E-mail</div>
+                <span>nextep.solutionsorg@gmail.com</span>
+              </div>
+            </div>
+            <div class="footer__contact-item" style="margin-bottom:16px">
+              <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              <div>
+                <div style="font-weight:600;color:var(--text-primary)">LinkedIn</div>
+                <span>NexTep Solutions</span>
+              </div>
+            </div>
+            <div class="footer__contact-item">
+              <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              <div>
+                <div style="font-weight:600;color:var(--text-primary)">Instagram</div>
+                <span>@nextep.solutions</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <a href="index.html" class="footer__logo">
+            <img src="../Logos - Imagens/Nextep/Logo Reduzida Branca.png" alt="NexTep Solutions" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <span style="display:none">NEXTEP</span>
+          </a>
+          <p class="footer__brand-desc">Tecnologia, automação e soluções digitais para empresas que querem evoluir.</p>
+        </div>
+        <div>
+          <h4 class="footer__title">NexTep</h4>
+          <ul class="footer__links">
+            <li><a href="empresa.html">Sobre</a></li>
+            <li><a href="projetos.html">Projetos</a></li>
+            <li><a href="solucoes.html">Soluções</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer__title">Soluções</h4>
+          <ul class="footer__links">
+            <li><a href="solucoes.html">Desenvolvimento</a></li>
+            <li><a href="solucoes.html">CRM</a></li>
+            <li><a href="solucoes.html">IA</a></li>
+            <li><a href="solucoes.html">Automação</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer__title">Empresa</h4>
+          <ul class="footer__links">
+            <li><a href="empresa.html">Sobre nós</a></li>
+            <li><a href="carreiras.html">Carreiras</a></li>
+            <li><a href="parcerias.html">Parcerias</a></li>
+            <li><a href="contato.html">Contato</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer__title">Contato</h4>
+          <div class="footer__contact-item">
+            <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            <span>WhatsApp: (31) 99965-7698</span>
+          </div>
+          <div class="footer__contact-item">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <span>nextep.solutionsorg@gmail.com</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <div class="footer__copy">&copy; 2026 NexTep Solutions. Todos os direitos reservados.</div>
+        <div class="footer__bottom-links">
+          <a href="politica-de-privacidade.html">Política de Privacidade</a>
+          <a href="termos-de-uso.html">Termos de Uso</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
+
