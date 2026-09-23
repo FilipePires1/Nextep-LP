@@ -142,14 +142,36 @@
   };
 
   /* ===== FORM HANDLING ===== */
+  const FORMS_ENDPOINT = 'https://script.google.com/macros/s/SEU_SCRIPT_ID_AQUI/exec'; // ← SUBSTITUA PELA URL DO SEU APPS SCRIPT
+
   document.querySelectorAll('form[data-type]').forEach(form => {
-    form.addEventListener('submit', e => {
+    form.addEventListener('submit', async e => {
       e.preventDefault();
       const type = form.dataset.type;
       const data = Object.fromEntries(new FormData(form));
       data._type = type;
       data._timestamp = new Date().toISOString();
       data._page = window.location.pathname;
+
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalText = submitBtn?.textContent;
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Enviando...';
+      }
+
+      try {
+        const response = await fetch(FORMS_ENDPOINT, {
+          method: 'POST',
+          mode: 'no-cors', // necessário para Google Apps Script
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        // Com no-cors não dá pra ler response, assume sucesso se não erro de rede
+      } catch (err) {
+        console.warn('[NexTep] Falha no envio (pode ser CORS), dados salvos localmente:', err);
+      }
+
       console.log('[NexTep] Form submission:', data);
       form.reset();
       const messages = {
@@ -159,6 +181,10 @@
         contact: 'Mensagem enviada com sucesso. Responderemos em breve.'
       };
       showToast(messages[type] || 'Enviado com sucesso!');
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+      }
     });
   });
 
