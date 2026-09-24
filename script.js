@@ -142,8 +142,17 @@
   };
 
   /* ===== FORM HANDLING ===== */
-  // Web3Forms — pegue sua Access Key em https://web3forms.com (é grátis)
+  // Web3Forms — receba no seu e-mail
   const WEB3FORMS_KEY = '58fc9c7e-7d5f-4633-a304-aaf409f24d67';
+
+  // EmailJS — envia confirmação automática pro quem preencheu
+  // Crie conta grátis em https://www.emailjs.com/ e preencha abaixo
+  const EMAILJS_PUBLIC_KEY = '';   // ← sua public key do EmailJS
+  const EMAILJS_SERVICE_ID = '';   // ← seu service ID
+  const EMAILJS_TEMPLATE_ID = '';  // ← seu template ID (autoresposta)
+  if (EMAILJS_PUBLIC_KEY && typeof emailjs !== 'undefined') {
+    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+  }
 
   document.querySelectorAll('form[data-type]').forEach(form => {
     form.addEventListener('submit', async e => {
@@ -187,6 +196,23 @@
           submitBtn.textContent = originalText;
         }
         return;
+      }
+
+      // Envia confirmação pro remetente via EmailJS
+      const formDataObj = Object.fromEntries(new FormData(form));
+      if (EMAILJS_PUBLIC_KEY && EMAILJS_SERVICE_ID && EMAILJS_TEMPLATE_ID && formDataObj.email) {
+        try {
+          await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+            to_email: formDataObj.email,
+            to_name: formDataObj.nome || 'Visitante',
+            from_name: 'NexTep Solutions',
+            reply_to: 'nextep.solutionsorg@gmail.com',
+            form_type: labels[type] || 'Formulário',
+            message: 'Recebemos sua mensagem. Nossa equipe entrará em contato em breve.'
+          });
+        } catch (err) {
+          console.warn('[NexTep] Falha ao enviar confirmação:', err);
+        }
       }
 
       console.log('[NexTep] Form enviado com sucesso:', type);
