@@ -143,16 +143,12 @@
 
   /* ===== FORM HANDLING ===== */
   // Web3Forms — pegue sua Access Key em https://web3forms.com (é grátis)
-  const WEB3FORMS_KEY = 'COLE_AQUI_SUA_ACCESS_KEY';
+  const WEB3FORMS_KEY = '58fc9c7e-7d5f-4633-a304-aaf409f24d67';
 
   document.querySelectorAll('form[data-type]').forEach(form => {
     form.addEventListener('submit', async e => {
       e.preventDefault();
       const type = form.dataset.type;
-      const data = Object.fromEntries(new FormData(form));
-      data._type = type;
-      data._timestamp = new Date().toISOString();
-      data._page = window.location.pathname;
 
       const labels = {
         contact: 'Contato - Site',
@@ -162,12 +158,12 @@
         unknown: 'Formulário - Site'
       };
 
-      const payload = {
-        access_key: WEB3FORMS_KEY,
-        subject: `[NexTep] ${labels[type] || 'Formulário'} — ${data.nome || ''}`,
-        from_name: data.nome || 'Site NexTep',
-        ...data
-      };
+      const formData = new FormData(form);
+      formData.append('access_key', WEB3FORMS_KEY);
+      formData.append('subject', `[NexTep] ${labels[type] || 'Formulário'}`);
+      formData.append('_type', type);
+      formData.append('_page', window.location.pathname);
+      formData.append('_timestamp', new Date().toISOString());
 
       const submitBtn = form.querySelector('button[type="submit"]');
       const originalText = submitBtn?.textContent;
@@ -177,13 +173,12 @@
       }
 
       try {
-        const res = await fetch('https://api.web3forms.com/submit', {
+        const response = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
+          body: formData
         });
-        const json = await res.json();
-        if (!json.success) throw new Error(json.message || 'Erro no envio');
+        const data = await response.json();
+        if (!data.success) throw new Error(data.message || 'Erro no envio');
       } catch (err) {
         console.error('[NexTep] Falha no envio:', err);
         showToast('Erro ao enviar. Tente novamente ou fale no WhatsApp.');
@@ -194,7 +189,7 @@
         return;
       }
 
-      console.log('[NexTep] Form submission:', data);
+      console.log('[NexTep] Form enviado com sucesso:', type);
       form.reset();
       const messages = {
         lead: 'Recebemos sua mensagem. Nossa equipe entrará em contato em breve.',
