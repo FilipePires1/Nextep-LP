@@ -142,7 +142,8 @@
   };
 
   /* ===== FORM HANDLING ===== */
-  const FORMS_ENDPOINT = '/api/submit';
+  // URL do Google Apps Script (Deploy > Web App > copie a URL aqui)
+  const FORMS_ENDPOINT = 'COLE_AQUI_A_URL_DO_SEU_APPS_SCRIPT';
 
   document.querySelectorAll('form[data-type]').forEach(form => {
     form.addEventListener('submit', async e => {
@@ -163,7 +164,8 @@
       try {
         await fetch(FORMS_ENDPOINT, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify(data)
         });
       } catch (err) {
