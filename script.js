@@ -142,8 +142,8 @@
   };
 
   /* ===== FORM HANDLING ===== */
-  // URL do Google Apps Script (Deploy > Web App > copie a URL aqui)
-  const FORMS_ENDPOINT = 'COLE_AQUI_A_URL_DO_SEU_APPS_SCRIPT';
+  // Web3Forms — pegue sua Access Key em https://web3forms.com (é grátis)
+  const WEB3FORMS_KEY = 'COLE_AQUI_SUA_ACCESS_KEY';
 
   document.querySelectorAll('form[data-type]').forEach(form => {
     form.addEventListener('submit', async e => {
@@ -154,6 +154,21 @@
       data._timestamp = new Date().toISOString();
       data._page = window.location.pathname;
 
+      const labels = {
+        contact: 'Contato - Site',
+        lead: 'Solicitação de Projeto',
+        candidate: 'Candidatura - Vagas',
+        partner: 'Proposta de Parceria',
+        unknown: 'Formulário - Site'
+      };
+
+      const payload = {
+        access_key: WEB3FORMS_KEY,
+        subject: `[NexTep] ${labels[type] || 'Formulário'} — ${data.nome || ''}`,
+        from_name: data.nome || 'Site NexTep',
+        ...data
+      };
+
       const submitBtn = form.querySelector('button[type="submit"]');
       const originalText = submitBtn?.textContent;
       if (submitBtn) {
@@ -162,14 +177,21 @@
       }
 
       try {
-        await fetch(FORMS_ENDPOINT, {
+        const res = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify(data)
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
         });
+        const json = await res.json();
+        if (!json.success) throw new Error(json.message || 'Erro no envio');
       } catch (err) {
         console.error('[NexTep] Falha no envio:', err);
+        showToast('Erro ao enviar. Tente novamente ou fale no WhatsApp.');
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalText;
+        }
+        return;
       }
 
       console.log('[NexTep] Form submission:', data);
