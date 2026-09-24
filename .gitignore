@@ -1,0 +1,17 @@
+# Local data (form submissions)
+data/
+
+# Node
+node_modules/
+.env
+
+# Vercel
+.vercel/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/

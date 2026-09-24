@@ -1,17 +1,24 @@
 {
-  "buildCommand": "echo 'static site'",
+  "buildCommand": "",
   "outputDirectory": ".",
   "framework": null,
+  "functions": {
+    "api/*.js": {
+      "runtime": "@vercel/node@3"
+    }
+  },
   "rewrites": [
-    { "source": "/a-nextep/", "destination": "/a-nextep/index.html" },
-    { "source": "/solucoes/", "destination": "/solucoes/index.html" },
-    { "source": "/projetos/", "destination": "/projetos/index.html" },
-    { "source": "/parcerias/", "destination": "/parcerias/index.html" },
-    { "source": "/carreiras/", "destination": "/carreiras/index.html" },
-    { "source": "/contato/", "destination": "/contato/index.html" },
-    { "source": "/vagas/", "destination": "/vagas/index.html" },
-    { "source": "/politica-de-privacidade/", "destination": "/politica-de-privacidade/index.html" },
-    { "source": "/termos-de-uso/", "destination": "/termos-de-uso/index.html" }
+    { "source": "/a-nextep", "destination": "/a-nextep/index.html" },
+    { "source": "/solucoes", "destination": "/solucoes/index.html" },
+    { "source": "/projetos", "destination": "/projetos/index.html" },
+    { "source": "/parcerias", "destination": "/parcerias/index.html" },
+    { "source": "/carreiras", "destination": "/carreiras/index.html" },
+    { "source": "/contato", "destination": "/contato/index.html" },
+    { "source": "/vagas", "destination": "/vagas/index.html" },
+    { "source": "/politica-de-privacidade", "destination": "/politica-de-privacidade/index.html" },
+    { "source": "/termos-de-uso", "destination": "/termos-de-uso/index.html" },
+    { "source": "/painel", "destination": "/painel/index.html" },
+    { "source": "/painel/", "destination": "/painel/index.html" }
   ],
   "headers": [
     {
@@ -20,6 +27,20 @@
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "X-Frame-Options", "value": "DENY" },
         { "key": "X-XSS-Protection", "value": "1; mode=block" }
+      ]
+    },
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET, POST, OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Content-Type" }
+      ]
+    },
+    {
+      "source": "/painel/(.*)",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
       ]
     }
   ]

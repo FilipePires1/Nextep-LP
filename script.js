@@ -142,7 +142,7 @@
   };
 
   /* ===== FORM HANDLING ===== */
-  const FORMS_ENDPOINT = 'https://script.google.com/macros/s/SEU_SCRIPT_ID_AQUI/exec'; // ← SUBSTITUA PELA URL DO SEU APPS SCRIPT
+  const FORMS_ENDPOINT = '/api/submit';
 
   document.querySelectorAll('form[data-type]').forEach(form => {
     form.addEventListener('submit', async e => {
@@ -161,15 +161,13 @@
       }
 
       try {
-        const response = await fetch(FORMS_ENDPOINT, {
+        await fetch(FORMS_ENDPOINT, {
           method: 'POST',
-          mode: 'no-cors', // necessário para Google Apps Script
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data)
         });
-        // Com no-cors não dá pra ler response, assume sucesso se não erro de rede
       } catch (err) {
-        console.warn('[NexTep] Falha no envio (pode ser CORS), dados salvos localmente:', err);
+        console.error('[NexTep] Falha no envio:', err);
       }
 
       console.log('[NexTep] Form submission:', data);

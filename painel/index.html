@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel — NexTep Solutions</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/png" href="../favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .panel { min-height: 100vh; background: var(--bg-primary); }
+    .panel__header { background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: 20px 0; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(12px); }
+    .panel__header-inner { display: flex; align-items: center; justify-content: space-between; max-width: 1400px; margin: 0 auto; padding: 0 24px; }
+    .panel__logo { display: flex; align-items: center; gap: 12px; }
+    .panel__logo img { height: 32px; }
+    .panel__title { font-family: 'Space Grotesk', sans-serif; font-size: 1.125rem; font-weight: 600; color: var(--text-primary); }
+    .panel__badge { background: var(--accent); color: #fff; font-size: 0.7rem; font-weight: 700; padding: 4px 10px; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.05em; }
+
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; max-width: 1400px; margin: 32px auto; padding: 0 24px; }
+    .stat-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px; }
+    .stat-card__number { font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; color: var(--text-primary); line-height: 1; }
+    .stat-card__label { font-size: 0.8rem; color: var(--text-muted); margin-top: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .stat-card__icon { float: right; opacity: 0.3; }
+
+    .filters { display: flex; gap: 8px; flex-wrap: wrap; max-width: 1400px; margin: 0 auto 24px; padding: 0 24px; }
+    .filter-btn { background: var(--bg-card); border: 1px solid var(--border); color: var(--text-secondary); padding: 8px 16px; border-radius: 100px; font-size: 0.8rem; font-weight: 500; cursor: pointer; transition: all var(--transition); font-family: inherit; }
+    .filter-btn:hover { border-color: var(--border-hover); color: var(--text-primary); }
+    .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+    .panel__actions { display: flex; gap: 8px; margin-left: auto; }
+    .panel__actions .btn { font-size: 0.8rem; padding: 8px 16px; }
+
+    .table-wrapper { max-width: 1400px; margin: 0 auto; padding: 0 24px 60px; overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; }
+    thead { background: var(--bg-secondary); }
+    th { text-align: left; padding: 14px 16px; font-size: 0.75rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; }
+    td { padding: 14px 16px; font-size: 0.875rem; color: var(--text-secondary); border-top: 1px solid var(--border); vertical-align: top; }
+    tr:hover td { background: var(--bg-card-hover); }
+    td strong { color: var(--text-primary); font-weight: 600; }
+
+    .tag { display: inline-block; padding: 4px 10px; border-radius: 100px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; }
+    .tag--contact { background: rgba(59,130,246,0.15); color: #3B82F6; }
+    .tag--lead { background: rgba(16,185,129,0.15); color: #10B981; }
+    .tag--candidate { background: rgba(245,158,11,0.15); color: #F59E0B; }
+    .tag--partner { background: rgba(168,85,247,0.15); color: #A855F7; }
+    .tag--unknown { background: rgba(107,107,128,0.15); color: #6B6B80; }
+
+    .empty { text-align: center; padding: 80px 24px; }
+    .empty__icon { font-size: 3rem; margin-bottom: 16px; opacity: 0.3; }
+    .empty__title { font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; color: var(--text-primary); margin-bottom: 8px; }
+    .empty__desc { color: var(--text-muted); font-size: 0.9rem; }
+
+    .loading { text-align: center; padding: 60px; color: var(--text-muted); }
+
+    .row-detail { display: none; background: var(--bg-secondary) !important; }
+    .row-detail.open { display: table-row; }
+    .row-detail td { padding: 20px 24px; }
+    .detail-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
+    .detail-item__label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+    .detail-item__value { font-size: 0.9rem; color: var(--text-primary); word-break: break-word; }
+
+    .refresh-bar { display: flex; align-items: center; justify-content: space-between; max-width: 1400px; margin: 0 auto 24px; padding: 0 24px; }
+    .refresh-info { font-size: 0.8rem; color: var(--text-muted); }
+    .refresh-info span { color: var(--accent); font-weight: 600; }
+
+    @media (max-width: 768px) {
+      .panel__header-inner { flex-direction: column; gap: 12px; }
+      .panel__actions { margin-left: 0; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .detail-grid { grid-template-columns: 1fr; }
+      th, td { padding: 10px 12px; font-size: 0.8rem; }
+    }
+  </style>
+</head>
+<body style="background:var(--bg-primary)">
+  <div class="panel">
+    <header class="panel__header">
+      <div class="panel__header-inner">
+        <div class="panel__logo">
+          <img src="../../Logos - Imagens/Nextep/Logo Reduzida Branca.png" alt="NexTep" onerror="this.style.display='none'">
+          <span class="panel__title">Painel de Formulários</span>
+          <span class="panel__badge">Admin</span>
+        </div>
+        <div class="panel__actions">
+          <button class="btn btn-primary" onclick="loadData()">Atualizar</button>
+          <button class="btn btn-secondary" onclick="exportCSV()">Exportar CSV</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="stats" id="stats">
+      <div class="stat-card">
+        <div class="stat-card__number" id="statTotal">—</div>
+        <div class="stat-card__label">Total de envios</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__number" id="statContato">—</div>
+        <div class="stat-card__label">Contato</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__number" id="statLead">—</div>
+        <div class="stat-card__label">Projetos</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__number" id="statCandidate">—</div>
+        <div class="stat-card__label">Candidaturas</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__number" id="statPartner">—</div>
+        <div class="stat-card__label">Parcerias</div>
+      </div>
+    </div>
+
+    <div class="filters" id="filters">
+      <button class="filter-btn active" data-filter="all">Todos</button>
+      <button class="filter-btn" data-filter="contact">Contato</button>
+      <button class="filter-btn" data-filter="lead">Projetos</button>
+      <button class="filter-btn" data-filter="candidate">Candidaturas</button>
+      <button class="filter-btn" data-filter="partner">Parcerias</button>
+    </div>
+
+    <div class="refresh-bar">
+      <div class="refresh-info" id="refreshInfo">Carregando...</div>
+      <div class="refresh-info">Fonte: <span id="dataSource">—</span></div>
+    </div>
+
+    <div class="table-wrapper">
+      <div id="loading" class="loading">Carregando submissões...</div>
+      <div id="empty" class="empty" style="display:none">
+        <div class="empty__icon">📋</div>
+        <div class="empty__title">Nenhuma submissão encontrada</div>
+        <div class="empty__desc">Os formulários do site aparecerão aqui quando forem enviados.</div>
+      </div>
+      <table id="table" style="display:none">
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Tipo</th>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Empresa</th>
+            <th>Serviço</th>
+            <th>Descrição</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    let allData = [];
+    let currentFilter = 'all';
+
+    const TYPE_LABELS = {
+      contact: 'Contato',
+      lead: 'Projeto',
+      candidate: 'Candidatura',
+      partner: 'Parceria',
+      unknown: 'Outro'
+    };
+
+    async function loadData() {
+      document.getElementById('loading').style.display = 'block';
+      document.getElementById('table').style.display = 'none';
+      document.getElementById('empty').style.display = 'none';
+
+      try {
+        const res = await fetch('/api/submissions');
+        const json = await res.json();
+        allData = json.submissions || [];
+        document.getElementById('dataSource').textContent = json.source || 'desconhecida';
+      } catch (err) {
+        // Fallback: tenta ler de arquivo local
+        try {
+          const res = await fetch('../data/submissions.json');
+          allData = await res.json();
+          document.getElementById('dataSource').textContent = 'local';
+        } catch (e) {
+          allData = [];
+          document.getElementById('dataSource').textContent = 'erro';
+        }
+      }
+
+      document.getElementById('loading').style.display = 'none';
+      render();
+    }
+
+    function render() {
+      const filtered = currentFilter === 'all'
+        ? allData
+        : allData.filter(d => d._type === currentFilter);
+
+      // Stats
+      document.getElementById('statTotal').textContent = allData.length;
+      document.getElementById('statContato').textContent = allData.filter(d => d._type === 'contact').length;
+      document.getElementById('statLead').textContent = allData.filter(d => d._type === 'lead').length;
+      document.getElementById('statCandidate').textContent = allData.filter(d => d._type === 'candidate').length;
+      document.getElementById('statPartner').textContent = allData.filter(d => d._type === 'partner').length;
+
+      document.getElementById('refreshInfo').innerHTML = `${filtered.length} de <span>${allData.length}</span> submissões`;
+
+      if (filtered.length === 0) {
+        document.getElementById('table').style.display = 'none';
+        document.getElementById('empty').style.display = 'block';
+        return;
+      }
+
+      document.getElementById('empty').style.display = 'none';
+      document.getElementById('table').style.display = 'table';
+
+      const tbody = document.getElementById('tableBody');
+      tbody.innerHTML = filtered.map((d, i) => {
+        const date = d._receivedAt || d._timestamp || '';
+        const dateStr = date ? new Date(date).toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo', day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' }) : '—';
+        const type = d._type || 'unknown';
+        const desc = d.descricao || d.proposta || '—';
+        const descShort = desc.length > 60 ? desc.substring(0, 60) + '...' : desc;
+
+        return `
+          <tr onclick="toggleDetail(${i})" style="cursor:pointer">
+            <td style="white-space:nowrap">${dateStr}</td>
+            <td><span class="tag tag--${type}">${TYPE_LABELS[type] || type}</span></td>
+            <td><strong>${esc(d.nome) || '—'}</strong></td>
+            <td>${esc(d.email) || '—'}</td>
+            <td>${esc(d.empresa) || '—'}</td>
+            <td>${esc(d.servico) || '—'}</td>
+            <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(descShort)}</td>
+            <td style="color:var(--accent);font-weight:600">▸</td>
+          </tr>
+          <tr class="row-detail" id="detail-${i}">
+            <td colspan="8">
+              <div class="detail-grid">
+                <div class="detail-item"><div class="detail-item__label">Nome</div><div class="detail-item__value">${esc(d.nome) || '—'}</div></div>
+                <div class="detail-item"><div class="detail-item__label">E-mail</div><div class="detail-item__value">${esc(d.email) || '—'}</div></div>
+                <div class="detail-item"><div class="detail-item__label">WhatsApp</div><div class="detail-item__value">${esc(d.whatsapp) || '—'}</div></div>
+                <div class="detail-item"><div class="detail-item__label">Empresa</div><div class="detail-item__value">${esc(d.empresa) || '—'}</div></div>
+                <div class="detail-item"><div class="detail-item__label">Segmento</div><div class="detail-item__value">${esc(d.segmento) || '—'}</div></div>
+                <div class="detail-item"><div class="detail-item__label">Serviço</div><div class="detail-item__value">${esc(d.servico) || '—'}</div></div>
+                <div class="detail-item"><div class="detail-item__label">Orçamento</div><div class="detail-item__value">${esc(d.orcamento) || '—'}</div></div>
+                <div class="detail-item"><div class="detail-item__label">Prazo</div><div class="detail-item__value">${esc(d.prazo) || '—'}</div></div>
+                <div class="detail-item"><div class="detail-item__label">Página de origem</div><div class="detail-item__value">${esc(d._page) || '—'}</div></div>
+                <div class="detail-item"><div class="detail-item__label">Portfólio / Link</div><div class="detail-item__value">${esc(d.portfolio || d.site || d.linkedin) || '—'}</div></div>
+                <div class="detail-item" style="grid-column:1/-1"><div class="detail-item__label">Descrição / Proposta</div><div class="detail-item__value">${esc(d.descricao || d.proposta) || '—'}</div></div>
+                ${d.email ? `<div class="detail-item" style="grid-column:1/-1"><a class="btn btn-primary btn-sm" href="mailto:${esc(d.email)}">Responder por e-mail</a> ${d.whatsapp ? `<a class="btn btn-secondary btn-sm" href="https://wa.me/55${esc(d.whatsapp).replace(/\D/g, '')}" target="_blank" style="margin-left:8px">WhatsApp</a>` : ''}</div>` : ''}
+              </div>
+            </td>
+          </tr>`;
+      }).join('');
+    }
+
+    function toggleDetail(i) {
+      const el = document.getElementById('detail-' + i);
+      if (el) el.classList.toggle('open');
+    }
+
+    function esc(str) {
+      if (!str) return '';
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    // Filters
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFilter = btn.dataset.filter;
+        render();
+      });
+    });
+
+    function exportCSV() {
+      if (allData.length === 0) { alert('Nenhum dado para exportar.'); return; }
+      const headers = ['Data', 'Tipo', 'Página', 'Nome', 'Empresa', 'E-mail', 'WhatsApp', 'Segmento', 'Serviço', 'Orçamento', 'Prazo', 'Descrição', 'Portfólio'];
+      const rows = allData.map(d => [
+        d._receivedAt || d._timestamp || '',
+        TYPE_LABELS[d._type] || d._type || '',
+        d._page || '',
+        d.nome || '',
+        d.empresa || '',
+        d.email || '',
+        d.whatsapp || '',
+        d.segmento || '',
+        d.servico || '',
+        d.orcamento || '',
+        d.prazo || '',
+        d.descricao || d.proposta || '',
+        d.portfolio || d.site || d.linkedin || ''
+      ]);
+      const csv = [headers, ...rows].map(r => r.map(f => `"${String(f).replace(/"/g, '""')}"`).join(',')).join('\n');
+      const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `formularios-nextep-${new Date().toISOString().split('T')[0]}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    // Auto-refresh every 30 seconds
+    loadData();
+    setInterval(loadData, 30000);
+  </script>
+</body>
+</html>
