@@ -267,6 +267,17 @@
         }
       }
 
+      // Avisa a equipe no WhatsApp (fire-and-forget)
+      fetch('/api/notify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          formType: type,
+          fields: formDataObj,
+          page: window.location.pathname
+        })
+      }).catch(() => {});
+
       console.log('[NexTep] Form enviado com sucesso:', type);
       form.reset();
       const messages = {
