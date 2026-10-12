@@ -64,14 +64,53 @@
     revealElements.forEach(el => revealObserver.observe(el));
   }
 
-  /* ===== FAQ ACCORDION ===== */
-  document.querySelectorAll('.faq-item').forEach(item => {
-    const btn = item.querySelector('.faq-question');
+  /* ===== FAQ / STEPS ACCORDION ===== */
+  document.querySelectorAll('.faq-item, .step-acc').forEach(item => {
+    const btn = item.querySelector('.faq-question, .step-acc__question');
     if (!btn) return;
     btn.addEventListener('click', () => {
       const wasActive = item.classList.contains('active');
-      item.closest('.faq').querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+      const container = item.closest('.faq, .steps-accordion');
+      if (container) {
+        container.querySelectorAll('.faq-item, .step-acc').forEach(i => i.classList.remove('active'));
+      }
       if (!wasActive) item.classList.add('active');
+    });
+  });
+
+  /* ===== TESTIMONIALS DRAG CAROUSEL ===== */
+  document.querySelectorAll('.tst-carousel').forEach(car => {
+    const track = car.querySelector('.tst-track');
+    if (!track) return;
+    let isDown = false, startX = 0, startTx = 0, tx = 0;
+
+    const clamp = () => {
+      const max = Math.min(0, car.clientWidth - track.scrollWidth);
+      tx = Math.max(max, Math.min(0, tx));
+    };
+
+    car.addEventListener('pointerdown', e => {
+      isDown = true;
+      startX = e.clientX;
+      startTx = tx;
+      track.style.transition = 'none';
+      car.classList.add('dragging');
+      car.setPointerCapture(e.pointerId);
+    });
+    car.addEventListener('pointermove', e => {
+      if (!isDown) return;
+      tx = startTx + (e.clientX - startX);
+      clamp();
+      track.style.transform = 'translateX(' + tx + 'px)';
+    });
+    const endDrag = () => { isDown = false; car.classList.remove('dragging'); };
+    car.addEventListener('pointerup', endDrag);
+    car.addEventListener('pointercancel', endDrag);
+    car.addEventListener('lostpointercapture', endDrag);
+
+    window.addEventListener('resize', () => {
+      clamp();
+      track.style.transform = 'translateX(' + tx + 'px)';
     });
   });
 
@@ -163,7 +202,6 @@
         contact: 'Contato - Site',
         lead: 'Solicitação de Projeto',
         candidate: 'Candidatura - Vagas',
-        partner: 'Proposta de Parceria',
         unknown: 'Formulário - Site'
       };
 
@@ -220,7 +258,6 @@
       const messages = {
         lead: 'Recebemos sua mensagem. Nossa equipe entrará em contato em breve.',
         candidate: 'Recebemos sua candidatura. Nosso time poderá entrar em contato caso seu perfil avance no processo.',
-        partner: 'Proposta de parceria enviada. Entraremos em contato em breve.',
         contact: 'Mensagem enviada com sucesso. Responderemos em breve.'
       };
       showToast(messages[type] || 'Enviado com sucesso!');
@@ -248,7 +285,7 @@
       waveSpd: 0.015,
       mouseInf: 130,
       mouseFrc: 0.25,
-      color: '59, 130, 246'
+      color: '115, 223, 240'
     };
 
     let mouse = { x: -999, y: -999, on: false };

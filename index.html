@@ -21,7 +21,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
 </head>
@@ -31,15 +31,13 @@
   <header class="header" id="header">
     <div class="header__inner">
       <a href="index.html" class="header__logo">
-        <img src="../Logos - Imagens/Nextep/Logo Reduzida Branca.png" alt="NexTep Solutions" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <img src="img/logo-nextep.png" alt="NexTep Solutions" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
         <span class="header__logo-text" style="display:none">NEXTEP</span>
       </a>
       <nav class="header__nav">
-        <a href="index.html" class="active">Início</a>
         <a href="a-nextep/">A NexTep</a>
         <a href="solucoes/">Soluções</a>
         <a href="projetos/">Projetos</a>
-        <a href="parcerias/">Parcerias</a>
         <a href="carreiras/">Carreiras</a>
         <a href="contato/">Contato</a>
       </nav>
@@ -54,11 +52,9 @@
 
   <!-- Mobile Nav -->
   <div class="mobile-nav" id="mobileNav">
-    <a href="index.html">Início</a>
     <a href="a-nextep/">A NexTep</a>
     <a href="solucoes/">Soluções</a>
     <a href="projetos/">Projetos</a>
-    <a href="parcerias/">Parcerias</a>
     <a href="carreiras/">Carreiras</a>
     <a href="contato/">Contato</a>
     <a href="contato/" class="btn btn-primary">Solicitar projeto</a>
@@ -170,47 +166,53 @@
     </div>
   </section>
 
-  <!-- ===== PHILOSOPHY ===== -->
-  <section class="section">
+  <!-- ===== PROCESSO ===== -->
+  <section class="section" id="processo">
     <div class="container">
-      <div class="section-header section-header--center reveal">
-        <div class="section-header__label">Nossa filosofia</div>
-        <h2 class="section-header__title">Tecnologia só faz sentido quando resolve problemas reais.</h2>
-        <p class="section-header__desc">
-          A NexTep combina tecnologia, estratégia e automação para desenvolver soluções que realmente fazem diferença na operação de cada empresa. Em vez de oferecer apenas ferramentas prontas, buscamos entender o contexto, identificar oportunidades e construir a estrutura adequada para cada necessidade.
-        </p>
+      <div class="process-grid">
+        <div class="process-grid__content reveal-left">
+          <div class="section-header__label">Nosso diferencial</div>
+          <h2>Como trabalhamos</h2>
+          <p>Projetos digitais não terminam quando entram no ar. Eles evoluem junto com o negócio. Do diagnóstico à evolução contínua, cada etapa é desenhada para gerar resultado real.</p>
+          <div class="process-grid__ctas">
+            <a href="contato/" class="btn btn-primary">Falar com a NexTep</a>
+            <a href="projetos/" class="btn btn-secondary">Ver projetos</a>
+          </div>
+        </div>
+        <div class="steps-accordion reveal-right">
+          <div class="step-acc active">
+            <button class="step-acc__question" type="button"><span class="step-acc__pill">Etapa 1</span>Diagnóstico<span class="faq-icon"></span></button>
+            <div class="faq-answer">
+              <p>Entendemos o negócio, o problema e os objetivos para identificar onde a tecnologia gera mais impacto.</p>
+            </div>
+          </div>
+          <div class="step-acc">
+            <button class="step-acc__question" type="button"><span class="step-acc__pill">Etapa 2</span>Estratégia<span class="faq-icon"></span></button>
+            <div class="faq-answer">
+              <p>Definimos a melhor abordagem tecnológica e o plano de execução do projeto.</p>
+            </div>
+          </div>
+          <div class="step-acc">
+            <button class="step-acc__question" type="button"><span class="step-acc__pill">Etapa 3</span>Desenvolvimento<span class="faq-icon"></span></button>
+            <div class="faq-answer">
+              <p>Construímos a solução com as tecnologias mais adequadas, em conjunto com o cliente.</p>
+            </div>
+          </div>
+          <div class="step-acc">
+            <button class="step-acc__question" type="button"><span class="step-acc__pill">Etapa 4</span>Implementação<span class="faq-icon"></span></button>
+            <div class="faq-answer">
+              <p>Colocamos a solução em funcionamento e realizamos as integrações e configurações necessárias.</p>
+            </div>
+          </div>
+          <div class="step-acc">
+            <button class="step-acc__question" type="button"><span class="step-acc__pill">Etapa 5</span>Evolução<span class="faq-icon"></span></button>
+            <div class="faq-answer">
+              <p>Acompanhamos os resultados e identificamos novas possibilidades de melhoria.</p>
+            </div>
+          </div>
+        </div>
       </div>
-<div class="grid-4">
-        <div class="card text-center">
-          <div class="card__icon mx-auto">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-          </div>
-          <h4 class="card__title">Entender</h4>
-          <p class="card__text">Compreendemos o negócio e seus desafios.</p>
-        </div>
-        <div class="card text-center">
-          <div class="card__icon mx-auto">
-            <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-          </div>
-          <h4 class="card__title">Planejar</h4>
-          <p class="card__text">Definimos a melhor estratégia tecnológica.</p>
-        </div>
-        <div class="card text-center">
-          <div class="card__icon mx-auto">
-            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-          </div>
-          <h4 class="card__title">Construir</h4>
-          <p class="card__text">Desenvolvemos a solução completa.</p>
-        </div>
-        <div class="card text-center">
-          <div class="card__icon mx-auto">
-            <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-          </div>
-          <h4 class="card__title">Evoluir</h4>
-          <p class="card__text">Acompanhamos, otimizamos e expandimos.</p>
-        </div>
-      </div>
-</div>
+    </div>
   </section>
 
   <div class="separator"></div>
@@ -218,43 +220,57 @@
   <!-- ===== SOLUTIONS OVERVIEW ===== -->
   <section class="section section--dark" id="solucoes">
     <div class="container">
-      <div class="section-header reveal">
-        <div class="section-header__label">Soluções</div>
-        <h2 class="section-header__title">Ecossistema completo de soluções digitais</h2>
-        <p class="section-header__desc">Cada empresa possui necessidades diferentes. A NexTep desenvolve a solução adequada para cada desafio.</p>
+      <div class="section-split reveal">
+        <div>
+          <div class="section-header__label">Soluções</div>
+          <h2>Ecossistema completo de soluções digitais</h2>
+        </div>
+        <p class="section-split__desc">Cada empresa possui necessidades diferentes. A NexTep desenvolve a solução adequada para cada desafio.</p>
       </div>
-      <div class="grid-4">
-        <a href="solucoes/" class="card">
+      <div class="solutions-grid">
+        <a href="solucoes/" class="solution-card reveal">
+          <span class="pixels pixels--tl"></span>
+          <span class="pixels pixels--tr"></span>
           <div class="card__icon">
             <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
           </div>
-          <h4 class="card__title">Desenvolvimento Web</h4>
-          <p class="card__text">Sites institucionais, landing pages, plataformas e experiências digitais modernas.</p>
-          <span class="card__link">Saiba mais →</span>
+          <div class="solution-card__body">
+            <h3 class="solution-card__title">Desenvolvimento Web</h3>
+            <p class="solution-card__text">Sites institucionais, landing pages, plataformas e experiências digitais modernas.</p>
+          </div>
         </a>
-        <a href="solucoes/" class="card">
+        <a href="solucoes/" class="solution-card reveal">
+          <span class="pixels pixels--tl"></span>
+          <span class="pixels pixels--tr"></span>
           <div class="card__icon">
             <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
           </div>
-          <h4 class="card__title">Sistemas e Plataformas</h4>
-          <p class="card__text">Sistemas internos, plataformas web, painéis administrativos e aplicações personalizadas.</p>
-          <span class="card__link">Saiba mais →</span>
+          <div class="solution-card__body">
+            <h3 class="solution-card__title">Sistemas e Plataformas</h3>
+            <p class="solution-card__text">Sistemas internos, plataformas web, painéis administrativos e aplicações personalizadas.</p>
+          </div>
         </a>
-        <a href="solucoes/" class="card">
+        <a href="solucoes/" class="solution-card reveal">
+          <span class="pixels pixels--tl"></span>
+          <span class="pixels pixels--tr"></span>
           <div class="card__icon">
             <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           </div>
-          <h4 class="card__title">CRM</h4>
-          <p class="card__text">Estruturas para gestão de clientes, leads, equipes, processos e vendas.</p>
-          <span class="card__link">Saiba mais →</span>
+          <div class="solution-card__body">
+            <h3 class="solution-card__title">CRM</h3>
+            <p class="solution-card__text">Estruturas para gestão de clientes, leads, equipes, processos e vendas.</p>
+          </div>
         </a>
-        <a href="solucoes/" class="card">
+        <a href="solucoes/" class="solution-card reveal">
+          <span class="pixels pixels--tl"></span>
+          <span class="pixels pixels--tr"></span>
           <div class="card__icon">
             <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/><path d="M12 6v6l4 2"/></svg>
           </div>
-          <h4 class="card__title">Inteligência Artificial</h4>
-          <p class="card__text">Agentes de IA, assistentes inteligentes, automação de atendimento e soluções personalizadas.</p>
-          <span class="card__link">Saiba mais →</span>
+          <div class="solution-card__body">
+            <h3 class="solution-card__title">Inteligência Artificial</h3>
+            <p class="solution-card__text">Agentes de IA, assistentes inteligentes, automação de atendimento e soluções personalizadas.</p>
+          </div>
         </a>
       </div>
       <div class="text-center" style="margin-top:48px">
@@ -328,96 +344,34 @@
     </div>
   </section>
 
-  <!-- ===== HOW WE WORK ===== -->
-  <section class="section">
-    <div class="container">
-      <div class="section-header reveal">
-        <div class="section-header__label">Processo</div>
-        <h2 class="section-header__title">Como trabalhamos</h2>
-        <p class="section-header__desc">Projetos digitais não terminam quando entram no ar. Eles evoluem junto com o negócio.</p>
-      </div>
-      <div class="steps reveal">
-        <div class="step">
-          <div class="step__number"></div>
-          <div class="step__content">
-            <h3 class="step__title">Diagnóstico</h3>
-            <p class="step__text">Entendemos o negócio, o problema e os objetivos.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step__number"></div>
-          <div class="step__content">
-            <h3 class="step__title">Estratégia</h3>
-            <p class="step__text">Definimos a melhor abordagem tecnológica.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step__number"></div>
-          <div class="step__content">
-            <h3 class="step__title">Desenvolvimento</h3>
-            <p class="step__text">Construímos a solução utilizando tecnologias adequadas ao projeto.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step__number"></div>
-          <div class="step__content">
-            <h3 class="step__title">Implementação</h3>
-            <p class="step__text">Colocamos a solução em funcionamento e realizamos integrações e configurações.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step__number"></div>
-          <div class="step__content">
-            <h3 class="step__title">Evolução</h3>
-            <p class="step__text">Acompanhamos os resultados e identificamos novas possibilidades de melhoria.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <div class="separator"></div>
 
-  <!-- ===== TECHNOLOGIES ===== -->
-  <section class="section section--dark">
+  <!-- ===== ANTES / DEPOIS ===== -->
+  <section class="section">
     <div class="container">
-      <div class="section-header section-header--center reveal">
-        <div class="section-header__label">Tecnologia</div>
-        <h2 class="section-header__title">Ecossistema tecnológico</h2>
-        <p class="section-header__desc">Utilizamos as melhores tecnologias para construir soluções robustas, escaláveis e modernas.</p>
+      <div class="section-split reveal">
+        <div>
+          <div class="section-header__label">O que isso substitui</div>
+          <h2>De trabalho manual para sistemas automatizados</h2>
+        </div>
+        <p class="section-split__desc">Focamos em operações de alto impacto, onde a automação melhora diretamente velocidade, precisão e custo.</p>
       </div>
-      <div class="grid-4 reveal-stagger" style="max-width:900px;margin:0 auto">
-        <div class="card text-center" style="padding:24px">
-          <h4 class="card__title" style="font-size:0.9375rem;margin-bottom:4px">React</h4>
-          <p class="card__text" style="font-size:0.8125rem">Frontend</p>
+      <div class="ba-list reveal-stagger">
+        <div class="ba-row">
+          <div class="ba-side ba-side--before"><span class="ba-pill">Antes</span><span class="ba-text">Atendimento manual no WhatsApp</span></div>
+          <div class="ba-side ba-side--after"><span class="ba-pill">Depois</span><span class="ba-text">Agentes de IA respondendo 24 horas</span></div>
         </div>
-        <div class="card text-center" style="padding:24px">
-          <h4 class="card__title" style="font-size:0.9375rem;margin-bottom:4px">Node.js</h4>
-          <p class="card__text" style="font-size:0.8125rem">Backend</p>
+        <div class="ba-row">
+          <div class="ba-side ba-side--before"><span class="ba-pill">Antes</span><span class="ba-text">Gestão de clientes em planilhas</span></div>
+          <div class="ba-side ba-side--after"><span class="ba-pill">Depois</span><span class="ba-text">CRM centralizado com funil de vendas</span></div>
         </div>
-        <div class="card text-center" style="padding:24px">
-          <h4 class="card__title" style="font-size:0.9375rem;margin-bottom:4px">Python</h4>
-          <p class="card__text" style="font-size:0.8125rem">Automação & IA</p>
+        <div class="ba-row">
+          <div class="ba-side ba-side--before"><span class="ba-pill">Antes</span><span class="ba-text">Relatórios montados à mão</span></div>
+          <div class="ba-side ba-side--after"><span class="ba-pill">Depois</span><span class="ba-text">Dashboards automáticos em tempo real</span></div>
         </div>
-        <div class="card text-center" style="padding:24px">
-          <h4 class="card__title" style="font-size:0.9375rem;margin-bottom:4px">PostgreSQL</h4>
-          <p class="card__text" style="font-size:0.8125rem">Banco de dados</p>
-        </div>
-        <div class="card text-center" style="padding:24px">
-          <h4 class="card__title" style="font-size:0.9375rem;margin-bottom:4px">Supabase</h4>
-          <p class="card__text" style="font-size:0.8125rem">Backend-as-a-Service</p>
-        </div>
-        <div class="card text-center" style="padding:24px">
-          <h4 class="card__title" style="font-size:0.9375rem;margin-bottom:4px">n8n</h4>
-          <p class="card__text" style="font-size:0.8125rem">Automação</p>
-        </div>
-        <div class="card text-center" style="padding:24px">
-          <h4 class="card__title" style="font-size:0.9375rem;margin-bottom:4px">OpenAI</h4>
-          <p class="card__text" style="font-size:0.8125rem">Inteligência Artificial</p>
-        </div>
-        <div class="card text-center" style="padding:24px">
-          <h4 class="card__title" style="font-size:0.9375rem;margin-bottom:4px">Docker</h4>
-          <p class="card__text" style="font-size:0.8125rem">Infraestrutura</p>
+        <div class="ba-row">
+          <div class="ba-side ba-side--before"><span class="ba-pill">Antes</span><span class="ba-text">Prospecção e divulgação manuais</span></div>
+          <div class="ba-side ba-side--after"><span class="ba-pill">Depois</span><span class="ba-text">Landing pages com captação automática de leads</span></div>
         </div>
       </div>
     </div>
@@ -455,6 +409,107 @@
   </section>
 
   <div class="separator"></div>
+
+  <!-- ===== DEPOIMENTOS ===== -->
+  <!-- Substitua pelos depoimentos reais dos clientes -->
+  <section class="section testimonials">
+    <div class="container">
+      <div class="section-header section-header--center reveal">
+        <div class="section-header__label">Depoimentos</div>
+        <h2 class="section-header__title">O que os clientes dizem</h2>
+        <div class="rating-line">
+          <span>Excelente</span>
+          <span class="stars">
+            <span><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
+            <span><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
+            <span><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
+            <span><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
+            <span><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="tst-carousel reveal" id="tstCarousel">
+      <div class="tst-track">
+        <article class="tst-card">
+          <span class="pixels pixels--br"></span>
+          <div class="tst-card__quote">&ldquo;</div>
+          <p class="tst-card__text">O sistema se pagou já no primeiro mês. O que antes tomava horas agora acontece sozinho.</p>
+          <div class="tst-card__author">
+            <div class="tst-card__avatar">AM</div>
+            <div>
+              <div class="tst-card__name">Alex Martins</div>
+              <div class="tst-card__role">Head de Operações</div>
+            </div>
+          </div>
+        </article>
+        <article class="tst-card">
+          <span class="pixels pixels--br"></span>
+          <div class="tst-card__quote">&ldquo;</div>
+          <p class="tst-card__text">Substituímos fluxos manuais que achávamos impossíveis de automatizar.</p>
+          <div class="tst-card__author">
+            <div class="tst-card__avatar">DR</div>
+            <div>
+              <div class="tst-card__name">Daniel Rocha</div>
+              <div class="tst-card__role">Fundador</div>
+            </div>
+          </div>
+        </article>
+        <article class="tst-card">
+          <span class="pixels pixels--br"></span>
+          <div class="tst-card__quote">&ldquo;</div>
+          <p class="tst-card__text">O agente de IA no WhatsApp mudou nosso atendimento. Respondemos 24 horas sem aumentar a equipe.</p>
+          <div class="tst-card__author">
+            <div class="tst-card__avatar">MA</div>
+            <div>
+              <div class="tst-card__name">Marina Alves</div>
+              <div class="tst-card__role">Gestora Comercial</div>
+            </div>
+          </div>
+        </article>
+        <article class="tst-card">
+          <span class="pixels pixels--br"></span>
+          <div class="tst-card__quote">&ldquo;</div>
+          <p class="tst-card__text">Finalmente temos um CRM que a equipe realmente usa. O funil de vendas ficou visível de verdade.</p>
+          <div class="tst-card__author">
+            <div class="tst-card__avatar">PS</div>
+            <div>
+              <div class="tst-card__name">Pedro Santos</div>
+              <div class="tst-card__role">Sócio-fundador</div>
+            </div>
+          </div>
+        </article>
+        <article class="tst-card">
+          <span class="pixels pixels--br"></span>
+          <div class="tst-card__quote">&ldquo;</div>
+          <p class="tst-card__text">O sistema se pagou já no primeiro mês. O que antes tomava horas agora acontece sozinho.</p>
+          <div class="tst-card__author">
+            <div class="tst-card__avatar">AM</div>
+            <div>
+              <div class="tst-card__name">Alex Martins</div>
+              <div class="tst-card__role">Head de Operações</div>
+            </div>
+          </div>
+        </article>
+        <article class="tst-card">
+          <span class="pixels pixels--br"></span>
+          <div class="tst-card__quote">&ldquo;</div>
+          <p class="tst-card__text">Substituímos fluxos manuais que achávamos impossíveis de automatizar.</p>
+          <div class="tst-card__author">
+            <div class="tst-card__avatar">DR</div>
+            <div>
+              <div class="tst-card__name">Daniel Rocha</div>
+              <div class="tst-card__role">Fundador</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+    <div class="text-center" style="margin-top:48px">
+      <a href="contato/" class="btn btn-primary">Agendar uma conversa</a>
+      <a href="projetos/" class="btn btn-secondary" style="margin-left:12px">Ver projetos</a>
+    </div>
+  </section>
 
   <!-- ===== FAQ ===== -->
   <section class="section section--dark">
@@ -494,6 +549,12 @@
             <p>O processo começa com um diagnóstico para entender o problema. Em seguida, definimos a estratégia, desenvolvemos a solução, implementamos e acompanhamos a evolução.</p>
           </div>
         </div>
+        <div class="faq-cta reveal">
+          <span class="pixels pixels--l"></span>
+          <span class="pixels pixels--r"></span>
+          <h3>Não encontrou a resposta que procurava?</h3>
+          <p><a href="contato/">Fale com a NexTep</a>.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -508,12 +569,12 @@
   </section>
 
   <!-- ===== FOOTER ===== -->
-  <footer class="footer">
+  <footer class="footer" id="footer">
     <div class="container">
       <div class="footer__grid">
         <div>
           <a href="index.html" class="footer__logo">
-            <img src="../Logos - Imagens/Nextep/Logo Reduzida Branca.png" alt="NexTep Solutions" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <img src="img/logo-nextep.png" alt="NexTep Solutions" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
             <span style="display:none">NEXTEP</span>
           </a>
           <p class="footer__brand-desc">Tecnologia, automação e soluções digitais para empresas que querem evoluir.</p>
@@ -542,7 +603,6 @@
           <ul class="footer__links">
             <li><a href="a-nextep/">Sobre nós</a></li>
             <li><a href="carreiras/">Carreiras</a></li>
-            <li><a href="parcerias/">Parcerias</a></li>
             <li><a href="contato/">Contato</a></li>
           </ul>
         </div>
