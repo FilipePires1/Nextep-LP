@@ -189,9 +189,22 @@
   const EMAILJS_PUBLIC_KEY = '';   // ← sua public key do EmailJS
   const EMAILJS_SERVICE_ID = '';   // ← seu service ID
   const EMAILJS_TEMPLATE_ID = '';  // ← seu template ID (autoresposta)
-  if (EMAILJS_PUBLIC_KEY && typeof emailjs !== 'undefined') {
-    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+  let emailjsReady = null;
+  function loadEmailJS() {
+    if (emailjsReady) return emailjsReady;
+    emailjsReady = new Promise((resolve, reject) => {
+      const s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
+      s.onload = () => {
+        emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+        resolve();
+      };
+      s.onerror = reject;
+      document.head.appendChild(s);
+    });
+    return emailjsReady;
   }
+  if (EMAILJS_PUBLIC_KEY) loadEmailJS().catch(() => {});
 
   document.querySelectorAll('form[data-type]').forEach(form => {
     form.addEventListener('submit', async e => {
@@ -240,6 +253,7 @@
       const formDataObj = Object.fromEntries(new FormData(form));
       if (EMAILJS_PUBLIC_KEY && EMAILJS_SERVICE_ID && EMAILJS_TEMPLATE_ID && formDataObj.email) {
         try {
+          await loadEmailJS();
           await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
             to_email: formDataObj.email,
             to_name: formDataObj.nome || 'Visitante',
@@ -363,13 +377,14 @@
     }
 
     function connections() {
-      const max = cfg.connDist;
+      const max = cfg.connDist, max2 = max * max;
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
           const dy = particles[i].y - particles[j].y;
-          const d = Math.sqrt(dx * dx + dy * dy);
-          if (d < max) {
+          const d2 = dx * dx + dy * dy;
+          if (d2 < max2) {
+            const d = Math.sqrt(d2);
             const o = (1 - d / max) * 0.1;
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
@@ -402,15 +417,20 @@
       }
     }
 
-    function animate() {
-      if (!isVisible) { requestAnimationFrame(animate); return; }
+    let lastFrame = performance.now();
+    function animate(ts) {
+      requestAnimationFrame(animate);
+      if (!isVisible) return;
+      const now = ts || performance.now();
+      if (now - lastFrame < 32) return;
+      const factor = Math.min((now - lastFrame) / 16.67, 3);
+      lastFrame = now;
       const sy = window.scrollY;
-      time += cfg.waveSpd;
+      time += cfg.waveSpd * factor;
       ctx.clearRect(0, 0, w, h);
       waveLines(sy);
       particles.forEach(p => { p.update(sy); p.draw(); });
       connections();
-      requestAnimationFrame(animate);
     }
 
     const obs = new IntersectionObserver(e => { isVisible = e[0].isIntersecting; }, { threshold: 0 });
