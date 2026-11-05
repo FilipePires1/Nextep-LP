@@ -10,7 +10,8 @@
     { "source": "/contato", "destination": "/contato/index.html" },
     { "source": "/vagas", "destination": "/vagas/index.html" },
     { "source": "/politica-de-privacidade", "destination": "/politica-de-privacidade/index.html" },
-    { "source": "/termos-de-uso", "destination": "/termos-de-uso/index.html" }
+    { "source": "/termos-de-uso", "destination": "/termos-de-uso/index.html" },
+    { "source": "/links", "destination": "/links/index.html" }
   ],
   "headers": [
     {

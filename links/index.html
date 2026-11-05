@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="../favicon.png">
+  <title>NexTep Solutions — Links</title>
+  <meta name="description"
+    content="Links rápidos da NexTep Solutions: site, soluções, projetos e WhatsApp direto.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://nextepsolutions.vercel.app/links/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nextepsolutions.vercel.app/links/">
+  <meta property="og:title" content="NexTep Solutions — Links">
+  <meta property="og:description"
+    content="Site, soluções, projetos e WhatsApp direto da NexTep Solutions.">
+  <meta property="og:image" content="https://nextepsolutions.vercel.app/img/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="NexTep Solutions — Links">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://nextepsolutions.vercel.app/img/og-image.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&family=Inter:wght@400;500;600&display=swap"
+    onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&family=Inter:wght@400;500;600&display=swap">
+  </noscript>
+
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .lkb {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      max-width: 440px;
+      margin: 0 auto;
+      padding: 56px 20px 36px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .lkb__glow {
+      position: fixed;
+      left: 50%;
+      bottom: -240px;
+      transform: translateX(-50%);
+      width: 720px;
+      height: 480px;
+      background: radial-gradient(ellipse at center, rgba(115, 223, 240, 0.18) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .lkb__brand {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 4px;
+    }
+
+    .lkb__brand img {
+      height: 34px;
+      width: auto;
+    }
+
+    .lkb__tag {
+      font-size: 0.9375rem;
+      color: var(--text-secondary);
+    }
+
+    .lkb__list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      width: 100%;
+    }
+
+    .lkb__btn {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+      min-height: 62px;
+      padding: 13px 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      color: var(--text-primary);
+      transition: all var(--transition);
+    }
+
+    .lkb__btn:hover {
+      border-color: rgba(115, 223, 240, 0.4);
+      background: var(--accent-glow);
+      transform: translateY(-2px);
+    }
+
+    .lkb__btn:active {
+      transform: scale(0.98);
+    }
+
+    .lkb__btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .lkb__btn--primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #111111;
+      box-shadow: 0 8px 32px rgba(115, 223, 240, 0.25);
+    }
+
+    .lkb__btn--primary:hover {
+      background: var(--accent-hover);
+      border-color: var(--accent-hover);
+      box-shadow: 0 10px 40px rgba(115, 223, 240, 0.35);
+    }
+
+    .lkb__icon {
+      flex: none;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--bg-soft);
+      border: 1px solid var(--border-soft);
+    }
+
+    .lkb__btn--primary .lkb__icon {
+      background: rgba(17, 17, 17, 0.12);
+      border-color: rgba(17, 17, 17, 0.18);
+    }
+
+    .lkb__icon svg {
+      width: 19px;
+      height: 19px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.75;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .lkb__txt {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .lkb__txt strong {
+      font-size: 0.9875rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+    }
+
+    .lkb__txt small {
+      font-size: 0.8125rem;
+      line-height: 1.3;
+      color: var(--text-muted);
+    }
+
+    .lkb__btn--primary .lkb__txt small {
+      color: rgba(17, 17, 17, 0.65);
+    }
+
+    .lkb__arrow {
+      flex: none;
+      font-size: 1.125rem;
+      opacity: 0.5;
+      transition: all var(--transition);
+    }
+
+    .lkb__btn:hover .lkb__arrow {
+      opacity: 1;
+      transform: translateX(3px);
+    }
+
+    .lkb__social {
+      display: flex;
+      gap: 12px;
+    }
+
+    .lkb__social a {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      transition: all var(--transition);
+    }
+
+    .lkb__social a:hover {
+      border-color: rgba(115, 223, 240, 0.4);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .lkb__social a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .lkb__social svg {
+      width: 20px;
+      height: 20px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.75;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .lkb__foot {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    @keyframes lkb-in {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .lkb__brand,
+    .lkb__list .lkb__btn,
+    .lkb__social,
+    .lkb__foot {
+      animation: lkb-in 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+    }
+
+    .lkb__list .lkb__btn:nth-child(1) { animation-delay: 0.06s; }
+    .lkb__list .lkb__btn:nth-child(2) { animation-delay: 0.12s; }
+    .lkb__list .lkb__btn:nth-child(3) { animation-delay: 0.18s; }
+    .lkb__list .lkb__btn:nth-child(4) { animation-delay: 0.24s; }
+    .lkb__list .lkb__btn:nth-child(5) { animation-delay: 0.30s; }
+    .lkb__list .lkb__btn:nth-child(6) { animation-delay: 0.36s; }
+    .lkb__social { animation-delay: 0.42s; }
+    .lkb__foot { animation-delay: 0.48s; }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .lkb__brand,
+      .lkb__list .lkb__btn,
+      .lkb__social,
+      .lkb__foot {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="lkb__glow" aria-hidden="true"></div>
+
+  <main class="lkb">
+    <header class="lkb__brand">
+      <a href="../" aria-label="NexTep Solutions — página inicial">
+        <img src="../img/logo-nextep.webp" alt="NexTep Solutions"
+          onerror="if(!this.dataset.fb){this.dataset.fb=1;this.src='../img/logo-nextep.png'}else{this.style.display='none';}"
+          width="300" height="53">
+      </a>
+      <p class="lkb__tag">Tecnologia, automação e soluções digitais</p>
+    </header>
+
+    <nav class="lkb__list" aria-label="Links principais">
+      <a class="lkb__btn lkb__btn--primary"
+        href="https://wa.me/5531972691647?text=Ol%C3%A1!%20Vim%20pelo%20link%20do%20Instagram%20e%20gostaria%20de%20tirar%20uma%20d%C3%BAvida."
+        target="_blank" rel="noopener">
+        <span class="lkb__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+          </svg>
+        </span>
+        <span class="lkb__txt">
+          <strong>WhatsApp direto</strong>
+          <small>Tire sua dúvida agora</small>
+        </span>
+        <span class="lkb__arrow" aria-hidden="true">&rarr;</span>
+      </a>
+
+      <a class="lkb__btn" href="../">
+        <span class="lkb__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="2" y1="12" x2="22" y2="12" />
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+          </svg>
+        </span>
+        <span class="lkb__txt">
+          <strong>Site oficial</strong>
+          <small>Conheça a NexTep</small>
+        </span>
+        <span class="lkb__arrow" aria-hidden="true">&rarr;</span>
+      </a>
+
+      <a class="lkb__btn" href="../solucoes/">
+        <span class="lkb__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <polygon points="12 2 2 7 12 12 22 7 12 2" />
+            <polyline points="2 17 12 22 22 17" />
+            <polyline points="2 12 12 17 22 12" />
+          </svg>
+        </span>
+        <span class="lkb__txt">
+          <strong>Soluções</strong>
+          <small>Sites, sistemas, CRM, IA e automação</small>
+        </span>
+        <span class="lkb__arrow" aria-hidden="true">&rarr;</span>
+      </a>
+
+      <a class="lkb__btn" href="../projetos/">
+        <span class="lkb__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+          </svg>
+        </span>
+        <span class="lkb__txt">
+          <strong>Projetos</strong>
+          <small>O que já construímos</small>
+        </span>
+        <span class="lkb__arrow" aria-hidden="true">&rarr;</span>
+      </a>
+
+      <a class="lkb__btn" href="../contato/">
+        <span class="lkb__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <rect x="2" y="4" width="20" height="16" rx="2" />
+            <polyline points="22,6 12,13 2,6" />
+          </svg>
+        </span>
+        <span class="lkb__txt">
+          <strong>Solicitar orçamento</strong>
+          <small>Conte o que sua empresa precisa</small>
+        </span>
+        <span class="lkb__arrow" aria-hidden="true">&rarr;</span>
+      </a>
+
+      <a class="lkb__btn" href="../vagas/">
+        <span class="lkb__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <rect x="2" y="7" width="20" height="14" rx="2" />
+            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+          </svg>
+        </span>
+        <span class="lkb__txt">
+          <strong>Trabalhe conosco</strong>
+          <small>Vagas abertas na NexTep</small>
+        </span>
+        <span class="lkb__arrow" aria-hidden="true">&rarr;</span>
+      </a>
+    </nav>
+
+    <div class="lkb__social">
+      <a href="https://www.instagram.com/nextep.solutions/" target="_blank" rel="noopener"
+        aria-label="Instagram da NexTep">
+        <svg viewBox="0 0 24 24">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+        </svg>
+      </a>
+      <a href="mailto:nextep.solutionsorg@gmail.com" aria-label="E-mail da NexTep">
+        <svg viewBox="0 0 24 24">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+          <polyline points="22,6 12,13 2,6" />
+        </svg>
+      </a>
+      <a href="tel:+5531972691647" aria-label="Ligar para a NexTep">
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+        </svg>
+      </a>
+    </div>
+
+    <footer class="lkb__foot">&copy; 2026 NexTep Solutions</footer>
+  </main>
+</body>
+
+</html>
