@@ -258,7 +258,7 @@
             to_email: formDataObj.email,
             to_name: formDataObj.nome || 'Visitante',
             from_name: 'NexTep Solutions',
-            reply_to: 'nextep.solutionsorg@gmail.com',
+            reply_to: 'contato@nextepsolutions.com.br',
             form_type: labels[type] || 'Formulário',
             message: 'Recebemos sua mensagem. Nossa equipe entrará em contato em breve.'
           });
