@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  HUB_URL: https://gestor.116-203-100-189.sslip.io
+  HUB_URL: https://hub.nextepsolutions.com.br
 
 jobs:
   build-and-push:
