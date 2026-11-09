@@ -1,0 +1,87 @@
+name: Deploy TESTE — Nextep Site
+
+# Push em develop -> build GHCR + deploy no stack de teste + solicita
+# aprovação no Gestor. Produção NÃO é tocada aqui.
+on:
+  push:
+    branches: [ develop ]
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency:
+  group: deploy-teste-lp
+  cancel-in-progress: false
+
+env:
+  HUB_URL: https://gestor.116-203-100-189.sslip.io
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Login no GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build e push do site
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: |
+            ghcr.io/filipepires1/nextep-lp:${{ github.sha }}
+
+  deploy-test:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy no ambiente de teste
+        uses: appleboy/ssh-action@v1.0.0
+        env:
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          host: 116.203.100.189
+          username: filipe
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          envs: GHCR_TOKEN
+          script: |
+            set -e
+            export IMAGE_TAG=${{ github.sha }}
+            echo "$GHCR_TOKEN" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+            docker pull ghcr.io/filipepires1/nextep-lp:$IMAGE_TAG
+            cd /opt/nextep/lp-teste
+            docker compose --env-file .env.test -f compose.yml up -d --remove-orphans
+            docker compose --env-file .env.test -f compose.yml ps
+            docker exec nextep-lp-teste node -e "fetch('http://127.0.0.1:3000/api/health').then(r=>r.text()).then(t=>console.log('health:',t))"
+
+  request-approval:
+    needs: deploy-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Criar solicitação de deploy no Gestor
+        run: |
+          PAYLOAD=$(jq -n \
+            --arg repo "Nextep-LP" \
+            --arg sha "${{ github.sha }}" \
+            --arg actor "${{ github.actor }}" \
+            --arg msg "${{ github.event.head_commit.message }}" \
+            '{
+              repository: $repo,
+              branch: "develop",
+              commit_hash: $sha,
+              author_name: $actor,
+              commit_message: $msg,
+              environment_slug: "producao"
+            }')
+          curl -fsS -X POST "$HUB_URL/api/internal/deploy-requests" \
+            -H "Content-Type: application/json" \
+            -H "X-Deploy-Token: ${{ secrets.HUB_DEPLOY_TOKEN }}" \
+            -d "$PAYLOAD"

@@ -1,0 +1,63 @@
+name: Deploy PRODUÇÃO — Nextep Site
+
+# Só roda por repository_dispatch enviado pelo Gestor após aprovação.
+# NÃO existe gatilho de push: push na main não sobe produção.
+on:
+  repository_dispatch:
+    types: [ deploy-production ]
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  HUB_URL: https://gestor.116-203-100-189.sslip.io
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    outputs:
+      request_id: ${{ github.event.client_payload.request_id }}
+      commit_sha: ${{ github.event.client_payload.commit_sha }}
+    steps:
+      - name: Verificar aprovação no Gestor
+        run: |
+          REQ="${{ github.event.client_payload.request_id }}"
+          SHA="${{ github.event.client_payload.commit_sha }}"
+          if [ -z "$REQ" ] || [ -z "$SHA" ]; then
+            echo "Payload incompleto"; exit 1
+          fi
+          STATUS=$(curl -fsS "$HUB_URL/api/internal/deploy-requests/$REQ/status" \
+            -H "X-Deploy-Token: ${{ secrets.HUB_DEPLOY_TOKEN }}" | jq -r '.data.status')
+          echo "Status da solicitação: $STATUS"
+          if [ "$STATUS" != "approved" ]; then
+            echo "Deploy NÃO aprovado. Abortando."; exit 1
+          fi
+
+  deploy:
+    needs: verify
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy no servidor de produção
+        uses: appleboy/ssh-action@v1.0.0
+        env:
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          host: 116.203.100.189
+          username: filipe
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          envs: GHCR_TOKEN
+          script: |
+            set -e
+            export IMAGE_TAG="${{ needs.verify.outputs.commit_sha }}"
+            echo "$GHCR_TOKEN" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+            docker pull ghcr.io/filipepires1/nextep-lp:$IMAGE_TAG
+            cd /opt/nextep/lp
+            docker compose -f compose.yml up -d --remove-orphans
+            docker compose -f compose.yml ps
+            docker exec nextep-lp node -e "fetch('http://127.0.0.1:3000/api/health').then(r=>r.text()).then(t=>console.log('health:',t))"
+
+      - name: Marcar deploy como concluído no Gestor
+        run: |
+          curl -fsS -X POST "$HUB_URL/api/internal/deploy-requests/${{ needs.verify.outputs.request_id }}/deployed" \
+            -H "X-Deploy-Token: ${{ secrets.HUB_DEPLOY_TOKEN }}"

@@ -1,0 +1,11 @@
+.git
+.github
+.vercel
+.vscode
+.idea
+.env
+.env.*
+api
+README.md
+node_modules
+data
