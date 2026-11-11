@@ -37,6 +37,19 @@ const SECURITY_HEADERS = {
   'Referrer-Policy': 'strict-origin-when-cross-origin',
 };
 
+// Arquivos internos que nunca devem ser servidos como conteudo publico.
+const BLOCKED_STATIC_PATHS = new Set([
+  '/server.js',
+  '/dockerfile',
+  '/.dockerignore',
+  '/vercel.json',
+  '/compose.yml',
+  '/compose.prod.yml',
+  '/readme.md',
+  '/package.json',
+  '/package-lock.json',
+]);
+
 const FORM_LABELS = {
   contact: 'Contato - Site',
   lead: 'Solicitacao de Projeto',
@@ -237,11 +250,13 @@ async function handleForms(req, res) {
 function sendFile(res, file, stat, status = 200) {
   const ext = path.extname(file).toLowerCase();
   const isHtml = ext === '.html';
+  const base = path.basename(file).toLowerCase();
+  const noCache = isHtml || base === 'sw.js' || base === 'manifest.webmanifest';
   res.writeHead(status, {
     ...SECURITY_HEADERS,
     'Content-Type': MIME[ext] || 'application/octet-stream',
     'Content-Length': stat.size,
-    'Cache-Control': isHtml ? 'no-cache' : 'public, max-age=86400',
+    'Cache-Control': noCache ? 'no-cache' : 'public, max-age=86400',
   });
   if (res.req.method === 'HEAD') return res.end();
   fs.createReadStream(file).pipe(res);
@@ -255,6 +270,14 @@ function serveStatic(req, res) {
     return sendJson(res, 400, { error: 'URL invalida' });
   }
   if (pathname.includes('\0')) return sendJson(res, 400, { error: 'URL invalida' });
+
+  const lowerPath = pathname.toLowerCase();
+  const hasHiddenSegment = pathname.split('/').some((segment) => {
+    return segment.startsWith('.') && segment !== '.well-known';
+  });
+  if (hasHiddenSegment || BLOCKED_STATIC_PATHS.has(lowerPath)) {
+    return sendJson(res, 404, { error: 'Nao encontrado' });
+  }
 
   const candidates = [];
   if (pathname.endsWith('/')) {
