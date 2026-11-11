@@ -7,13 +7,9 @@ const path = require('path');
 const ROOT = __dirname;
 const PORT = parseInt(process.env.PORT || '3000', 10);
 
-const EVOLUTION_URL = String(process.env.EVOLUTION_URL || '').replace(/\/+$/, '');
-const EVOLUTION_API_KEY = process.env.EVOLUTION_API_KEY || '';
-const EVOLUTION_INSTANCE = process.env.EVOLUTION_INSTANCE || '';
-const NOTIFY_TO = String(process.env.NOTIFY_TO || '')
-  .split(',')
-  .map((s) => s.trim())
-  .filter(Boolean);
+const HUB_SUPPORT_URL = String(process.env.HUB_SUPPORT_URL || '').replace(/\/+$/, '');
+const HUB_SUPPORT_API_KEY = process.env.HUB_SUPPORT_API_KEY || '';
+const HUB_SUPPORT_SYSTEM_KEY = process.env.HUB_SUPPORT_SYSTEM_KEY || 'nextep-site';
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',
@@ -120,76 +116,122 @@ function normalizePhone(value) {
   return digits;
 }
 
-function buildMessage(formType, fields, page) {
-  const title = FORM_LABELS[formType] || 'Formulario - Site';
-  const lines = ['*Novo formulario: ' + title + '*'];
+function buildDescription(formType, fields, page) {
+  const title = FORM_LABELS[formType] || 'Formulário - Site';
+  const lines = ['Formulário: ' + title];
+  if (page) lines.push('Página: ' + page);
+  lines.push('');
   const pairs = FIELDS_BY_TYPE[formType] || FIELDS_BY_TYPE.contact;
   for (const [key, label] of pairs) {
     const raw = fields[key];
     if (raw === undefined || raw === null) continue;
-    const value = String(raw).replace(/\s+/g, ' ').trim();
+    const value = String(raw).replace(/\r/g, '').trim();
     if (!value) continue;
-    lines.push(label + ': ' + (value.length > 400 ? value.slice(0, 400) + '...' : value));
+    lines.push(label + ': ' + (value.length > 1200 ? value.slice(0, 1200) + '...' : value));
   }
-  if (page) lines.push('Pagina: ' + page);
-  lines.push(new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }));
-  return lines.join('\n');
+  lines.push('');
+  lines.push('Recebido em: ' + new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }));
+  return lines.join('\n').slice(0, 5000);
 }
 
-async function sendWhatsApp(number, text) {
-  if (!EVOLUTION_URL || !EVOLUTION_API_KEY || !EVOLUTION_INSTANCE) return { ok: false, error: 'not configured' };
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 15000);
-  try {
-    const response = await fetch(
-      `${EVOLUTION_URL}/message/sendText/${encodeURIComponent(EVOLUTION_INSTANCE)}`,
-      {
-        method: 'POST',
-        headers: { apikey: EVOLUTION_API_KEY, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ number, text }),
-        signal: controller.signal,
-      }
-    );
-    if (!response.ok) {
-      const detail = await response.text().catch(() => '');
-      return { ok: false, status: response.status, error: detail.slice(0, 200) };
-    }
-    return { ok: true };
-  } catch (error) {
-    return { ok: false, error: error.message };
-  } finally {
-    clearTimeout(timer);
-  }
+function buildTitle(formType, fields) {
+  const label = FORM_LABELS[formType] || 'Formulário - Site';
+  const name = String(fields.nome || fields.email || '').trim();
+  return (name ? label + ': ' + name : label).slice(0, 200);
 }
 
-async function handleNotify(req, res) {
+function moduleForForm(formType) {
+  if (formType === 'lead') return 'site-proposta';
+  if (formType === 'candidate') return 'site-carreiras';
+  return 'site-contato';
+}
+
+function priorityForForm(formType) {
+  if (formType === 'lead') return 'high';
+  if (formType === 'candidate') return 'low';
+  return 'medium';
+}
+
+async function handleForms(req, res) {
   let body;
   try {
     body = JSON.parse(await readBody(req));
   } catch (error) {
-    return sendJson(res, 400, { ok: false, error: 'JSON invalido' });
+    return sendJson(res, 400, { ok: false, error: 'JSON inválido' });
   }
 
   const formType = String(body.formType || 'contact');
   const fields = body.fields && typeof body.fields === 'object' ? body.fields : {};
   const page = String(body.page || '').slice(0, 120);
 
-  if (NOTIFY_TO.length === 0) {
-    return sendJson(res, 200, { ok: true, skipped: 'NOTIFY_TO nao configurado' });
+  if (!fields.nome || !String(fields.nome).trim()) {
+    return sendJson(res, 400, { ok: false, error: 'Informe seu nome.' });
+  }
+  if (!fields.email || !String(fields.email).trim()) {
+    return sendJson(res, 400, { ok: false, error: 'Informe seu e-mail.' });
   }
 
-  const text = buildMessage(formType, fields, page);
-  const results = await Promise.all(
-    NOTIFY_TO.map(async (raw) => {
-      const number = normalizePhone(raw);
-      const result = await sendWhatsApp(number, text);
-      if (!result.ok) console.error('[notify] falha para', number, result);
-      return result;
-    })
-  );
+  if (!HUB_SUPPORT_URL || !HUB_SUPPORT_API_KEY) {
+    console.error('[forms] HUB_SUPPORT_URL/HUB_SUPPORT_API_KEY não configurados');
+    return sendJson(res, 503, { ok: false, error: 'Integração com o Hub não configurada.' });
+  }
 
-  const sent = results.filter((r) => r.ok).length;
-  return sendJson(res, 200, { ok: true, sent, total: NOTIFY_TO.length });
+  const externalId = 'site-' + formType + '-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10);
+  const payload = {
+    kind: 'request',
+    external_id: externalId,
+    title: buildTitle(formType, fields),
+    description: buildDescription(formType, fields, page),
+    priority: priorityForForm(formType),
+    module: moduleForForm(formType),
+    system: HUB_SUPPORT_SYSTEM_KEY,
+    requester: {
+      name: String(fields.nome || '').trim().slice(0, 200),
+      email: String(fields.email || '').trim().slice(0, 200),
+      phone: normalizePhone(fields.whatsapp || fields.telefone || '') || null,
+      user_id: 'site:' + formType + ':' + String(fields.email || '').trim().toLowerCase(),
+    },
+    metadata: {
+      form_type: formType,
+      page,
+      fields,
+    },
+  };
+
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 20000);
+  try {
+    const response = await fetch(HUB_SUPPORT_URL + '/items', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-API-Key': HUB_SUPPORT_API_KEY,
+      },
+      body: JSON.stringify(payload),
+      signal: controller.signal,
+    });
+
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok || !data.success) {
+      const message = (data.error && data.error.message) || data.message || ('Hub respondeu ' + response.status);
+      console.error('[forms] falha ao criar chamado no Hub:', message);
+      return sendJson(res, 502, { ok: false, error: 'Não foi possível registrar sua solicitação. Tente novamente ou fale no WhatsApp.' });
+    }
+
+    const item = data.data || {};
+    return sendJson(res, 200, {
+      ok: true,
+      protocol: item.protocol || null,
+      itemId: item.id || null,
+      kind: item.kind || 'request',
+      message: 'Solicitação registrada no Hub da Nextep.',
+    });
+  } catch (error) {
+    console.error('[forms] erro de conexão com o Hub:', error.message);
+    return sendJson(res, 502, { ok: false, error: 'Não foi possível registrar sua solicitação. Tente novamente ou fale no WhatsApp.' });
+  } finally {
+    clearTimeout(timer);
+  }
 }
 
 function sendFile(res, file, stat, status = 200) {
@@ -248,9 +290,9 @@ const server = http.createServer(async (req, res) => {
     return sendJson(res, 200, { status: 'ok', timestamp: new Date().toISOString() });
   }
 
-  if (url.pathname === '/api/notify') {
+  if (url.pathname === '/api/forms' || url.pathname === '/api/notify') {
     if (req.method !== 'POST') return sendJson(res, 405, { error: 'Method not allowed' });
-    return handleNotify(req, res);
+    return handleForms(req, res);
   }
 
   if (url.pathname.startsWith('/api/')) {

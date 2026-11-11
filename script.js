@@ -181,31 +181,8 @@
   };
 
   /* ===== FORM HANDLING ===== */
-  // Web3Forms — receba no seu e-mail
-  const WEB3FORMS_KEY = '58fc9c7e-7d5f-4633-a304-aaf409f24d67';
-
-  // EmailJS — envia confirmação automática pro quem preencheu
-  // Crie conta grátis em https://www.emailjs.com/ e preencha abaixo
-  const EMAILJS_PUBLIC_KEY = '';   // ← sua public key do EmailJS
-  const EMAILJS_SERVICE_ID = '';   // ← seu service ID
-  const EMAILJS_TEMPLATE_ID = '';  // ← seu template ID (autoresposta)
-  let emailjsReady = null;
-  function loadEmailJS() {
-    if (emailjsReady) return emailjsReady;
-    emailjsReady = new Promise((resolve, reject) => {
-      const s = document.createElement('script');
-      s.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
-      s.onload = () => {
-        emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
-        resolve();
-      };
-      s.onerror = reject;
-      document.head.appendChild(s);
-    });
-    return emailjsReady;
-  }
-  if (EMAILJS_PUBLIC_KEY) loadEmailJS().catch(() => {});
-
+  // Os formulários passam pelo backend do site, que cria a solicitação no Hub
+  // e dispara a confirmação por WhatsApp/e-mail usando as integrações do Hub.
   document.querySelectorAll('form[data-type]').forEach(form => {
     form.addEventListener('submit', async e => {
       e.preventDefault();
@@ -218,13 +195,7 @@
         unknown: 'Formulário - Site'
       };
 
-      const formData = new FormData(form);
-      formData.append('access_key', WEB3FORMS_KEY);
-      formData.append('subject', `[NexTep] ${labels[type] || 'Formulário'}`);
-      formData.append('_type', type);
-      formData.append('_page', window.location.pathname);
-      formData.append('_timestamp', new Date().toISOString());
-
+      const fields = Object.fromEntries(new FormData(form).entries());
       const submitBtn = form.querySelector('button[type="submit"]');
       const originalText = submitBtn?.textContent;
       if (submitBtn) {
@@ -233,62 +204,37 @@
       }
 
       try {
-        const response = await fetch('https://api.web3forms.com/submit', {
+        const response = await fetch('/api/forms', {
           method: 'POST',
-          body: formData
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            formType: type,
+            fields,
+            page: window.location.pathname
+          })
         });
-        const data = await response.json();
-        if (!data.success) throw new Error(data.message || 'Erro no envio');
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok || !data.ok) {
+          throw new Error(data.error || 'Erro no envio');
+        }
+
+        form.reset();
+        const protocol = data.protocol ? ' Protocolo: ' + data.protocol + '.' : '';
+        const messages = {
+          lead: 'Recebemos sua mensagem. Nossa equipe entrará em contato em breve.',
+          candidate: 'Recebemos sua candidatura. Nosso time poderá entrar em contato caso seu perfil avance no processo.',
+          contact: 'Mensagem enviada com sucesso. Responderemos em breve.'
+        };
+        showToast((messages[type] || 'Enviado com sucesso!') + protocol);
+        console.log('[NexTep] Form enviado ao Hub:', type, data.protocol || data.itemId || '');
       } catch (err) {
         console.error('[NexTep] Falha no envio:', err);
-        showToast('Erro ao enviar. Tente novamente ou fale no WhatsApp.');
+        showToast(err.message || 'Erro ao enviar. Tente novamente ou fale no WhatsApp.', 'error');
+      } finally {
         if (submitBtn) {
           submitBtn.disabled = false;
           submitBtn.textContent = originalText;
         }
-        return;
-      }
-
-      // Envia confirmação pro remetente via EmailJS
-      const formDataObj = Object.fromEntries(new FormData(form));
-      if (EMAILJS_PUBLIC_KEY && EMAILJS_SERVICE_ID && EMAILJS_TEMPLATE_ID && formDataObj.email) {
-        try {
-          await loadEmailJS();
-          await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-            to_email: formDataObj.email,
-            to_name: formDataObj.nome || 'Visitante',
-            from_name: 'NexTep Solutions',
-            reply_to: 'contato@nextepsolutions.com.br',
-            form_type: labels[type] || 'Formulário',
-            message: 'Recebemos sua mensagem. Nossa equipe entrará em contato em breve.'
-          });
-        } catch (err) {
-          console.warn('[NexTep] Falha ao enviar confirmação:', err);
-        }
-      }
-
-      // Avisa a equipe no WhatsApp (fire-and-forget)
-      fetch('/api/notify', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          formType: type,
-          fields: formDataObj,
-          page: window.location.pathname
-        })
-      }).catch(() => {});
-
-      console.log('[NexTep] Form enviado com sucesso:', type);
-      form.reset();
-      const messages = {
-        lead: 'Recebemos sua mensagem. Nossa equipe entrará em contato em breve.',
-        candidate: 'Recebemos sua candidatura. Nosso time poderá entrar em contato caso seu perfil avance no processo.',
-        contact: 'Mensagem enviada com sucesso. Responderemos em breve.'
-      };
-      showToast(messages[type] || 'Enviado com sucesso!');
-      if (submitBtn) {
-        submitBtn.disabled = false;
-        submitBtn.textContent = originalText;
       }
     });
   });
