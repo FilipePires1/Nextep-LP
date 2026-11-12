@@ -37,6 +37,83 @@ function normalizePhone(value) {
   return digits;
 }
 
+const FORM_RATE_LIMIT_MAX = 3;
+const FORM_RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;
+const RATE_LIMIT_MESSAGE = 'Você atingiu o limite de 3 envios por hora. Tente novamente mais tarde ou fale com a gente no WhatsApp.';
+const formRateBuckets = new Map();
+
+function getClientIp(req) {
+  const forwarded = String(req.headers['x-forwarded-for'] || '').split(',')[0].trim();
+  return String(
+    req.headers['cf-connecting-ip'] ||
+    req.headers['x-real-ip'] ||
+    forwarded ||
+    req.socket?.remoteAddress ||
+    'unknown'
+  ).replace(/^::ffff:/, '');
+}
+
+function checkFormRateLimit(ip) {
+  const now = Date.now();
+  const bucket = formRateBuckets.get(ip);
+  if (!bucket || bucket.resetAt <= now) {
+    if (bucket) formRateBuckets.delete(ip);
+    return { allowed: true, retryAfter: 0 };
+  }
+  if (bucket.count >= FORM_RATE_LIMIT_MAX) {
+    return { allowed: false, retryAfter: Math.ceil((bucket.resetAt - now) / 1000) };
+  }
+  return { allowed: true, retryAfter: 0 };
+}
+
+function recordFormSubmission(ip) {
+  const now = Date.now();
+  const bucket = formRateBuckets.get(ip);
+  if (!bucket || bucket.resetAt <= now) {
+    formRateBuckets.set(ip, { count: 1, resetAt: now + FORM_RATE_LIMIT_WINDOW_MS });
+  } else {
+    bucket.count += 1;
+  }
+
+  if (formRateBuckets.size > 5000) {
+    for (const [key, value] of formRateBuckets.entries()) {
+      if (value.resetAt <= now) formRateBuckets.delete(key);
+    }
+    if (formRateBuckets.size > 5000) {
+      formRateBuckets.delete(formRateBuckets.keys().next().value);
+    }
+  }
+}
+
+async function verifyTurnstile(token, ip) {
+  const secret = String(process.env.TURNSTILE_SECRET_KEY || '').trim();
+  if (!secret) return { ok: true, skipped: true };
+  if (!token) {
+    return { ok: false, message: 'Confirme que você não é um robô para enviar o formulário.' };
+  }
+
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 5000);
+  try {
+    const body = new URLSearchParams({ secret, response: String(token), remoteip: ip });
+    const response = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST',
+      body,
+      signal: controller.signal
+    });
+    const data = await response.json().catch(() => ({}));
+    if (!data.success) {
+      return { ok: false, message: 'Não foi possível validar a verificação de segurança. Tente novamente.' };
+    }
+    return { ok: true };
+  } catch (error) {
+    console.error('[forms] falha na verificacao Turnstile:', error.message);
+    return { ok: false, message: 'Não foi possível validar a verificação de segurança. Tente novamente.' };
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 function buildDescription(formType, fields, page) {
   const title = FORM_LABELS[formType] || 'Formulário - Site';
   const lines = ['Formulário: ' + title];
@@ -103,6 +180,18 @@ export default async function handler(req, res) {
     return res.status(400).json({ ok: false, error: 'Informe seu e-mail.' });
   }
 
+  const ip = getClientIp(req);
+  const rate = checkFormRateLimit(ip);
+  if (!rate.allowed) {
+    res.setHeader('Retry-After', String(rate.retryAfter || 3600));
+    return res.status(429).json({ ok: false, error: RATE_LIMIT_MESSAGE });
+  }
+
+  const turnstile = await verifyTurnstile(body.turnstileToken, ip);
+  if (!turnstile.ok) {
+    return res.status(400).json({ ok: false, error: turnstile.message });
+  }
+
   const hubUrl = String(process.env.HUB_SUPPORT_URL || '').replace(/\/+$/, '');
   const hubKey = process.env.HUB_SUPPORT_API_KEY || '';
   const systemKey = process.env.HUB_SUPPORT_SYSTEM_KEY || 'nextep-site';
@@ -144,6 +233,7 @@ export default async function handler(req, res) {
       return res.status(502).json({ ok: false, error: 'Não foi possível registrar sua solicitação. Tente novamente ou fale no WhatsApp.' });
     }
     const item = data.data || {};
+    recordFormSubmission(ip);
     return res.status(200).json({
       ok: true,
       protocol: item.protocol || null,
