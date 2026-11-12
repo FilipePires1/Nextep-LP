@@ -180,6 +180,81 @@
     setTimeout(() => toast.classList.remove('show'), 4000);
   };
 
+  /* ===== TURNSTILE ===== */
+  let turnstileConfigPromise = null;
+  let turnstileScriptPromise = null;
+  let turnstileSiteKey = '';
+
+  function loadTurnstileConfig() {
+    if (turnstileConfigPromise) return turnstileConfigPromise;
+    turnstileConfigPromise = fetch('/api/config', { headers: { Accept: 'application/json' } })
+      .then(response => response.ok ? response.json() : {})
+      .then(config => {
+        turnstileSiteKey = String(config.turnstileSiteKey || '').trim();
+        return turnstileSiteKey;
+      })
+      .catch(() => {
+        turnstileSiteKey = '';
+        return '';
+      });
+    return turnstileConfigPromise;
+  }
+
+  function loadTurnstileScript() {
+    if (window.turnstile) return Promise.resolve(window.turnstile);
+    if (turnstileScriptPromise) return turnstileScriptPromise;
+    turnstileScriptPromise = new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      script.async = true;
+      script.defer = true;
+      script.onload = () => window.turnstile ? resolve(window.turnstile) : reject(new Error('Turnstile indisponivel'));
+      script.onerror = () => reject(new Error('Falha ao carregar Turnstile'));
+      document.head.appendChild(script);
+    });
+    return turnstileScriptPromise;
+  }
+
+  async function ensureTurnstile(slot) {
+    if (!slot || slot.dataset.rendered === 'true') return;
+    const siteKey = await loadTurnstileConfig();
+    if (!siteKey) return;
+
+    try {
+      const turnstile = await loadTurnstileScript();
+      slot.hidden = false;
+      const widgetId = turnstile.render(slot, {
+        sitekey: siteKey,
+        theme: 'dark',
+        size: 'flexible',
+        callback: token => { slot.dataset.token = token; },
+        'expired-callback': () => { delete slot.dataset.token; },
+        'error-callback': () => { delete slot.dataset.token; }
+      });
+      slot.dataset.rendered = 'true';
+      slot.dataset.widgetId = String(widgetId);
+    } catch (error) {
+      console.error('[NexTep] Turnstile:', error);
+    }
+  }
+
+  function initTurnstileSlots() {
+    document.querySelectorAll('[data-turnstile]').forEach(slot => {
+      const form = slot.closest('form');
+      if (!form) return;
+      if (form.offsetParent !== null) {
+        ensureTurnstile(slot);
+      } else {
+        form.addEventListener('focusin', () => ensureTurnstile(slot), { once: true });
+        form.addEventListener('pointerdown', () => ensureTurnstile(slot), { once: true });
+      }
+    });
+  }
+
+  // Busca a configuracao cedo, mas nao bloqueia o carregamento da pagina.
+  loadTurnstileConfig();
+  initTurnstileSlots();
+
   /* ===== FORM HANDLING ===== */
   // Os formulários passam pelo backend do site, que cria a solicitação no Hub
   // e dispara a confirmação por WhatsApp/e-mail usando as integrações do Hub.
@@ -198,6 +273,17 @@
       const fields = Object.fromEntries(new FormData(form).entries());
       const submitBtn = form.querySelector('button[type="submit"]');
       const originalText = submitBtn?.textContent;
+      const turnstileSlot = form.querySelector('[data-turnstile]');
+
+      if (!turnstileSiteKey) await loadTurnstileConfig();
+      if (turnstileSiteKey) {
+        if (!turnstileSlot || !turnstileSlot.dataset.token) {
+          ensureTurnstile(turnstileSlot);
+          showToast('Confirme a verificação de segurança para enviar.', 'error');
+          return;
+        }
+      }
+
       if (submitBtn) {
         submitBtn.disabled = true;
         submitBtn.textContent = 'Enviando...';
@@ -210,7 +296,8 @@
           body: JSON.stringify({
             formType: type,
             fields,
-            page: window.location.pathname
+            page: window.location.pathname,
+            turnstileToken: turnstileSlot?.dataset.token || ''
           })
         });
         const data = await response.json().catch(() => ({}));
@@ -219,6 +306,10 @@
         }
 
         form.reset();
+        if (turnstileSlot && window.turnstile && turnstileSlot.dataset.widgetId) {
+          window.turnstile.reset(turnstileSlot.dataset.widgetId);
+          delete turnstileSlot.dataset.token;
+        }
         const protocol = data.protocol ? ' Protocolo: ' + data.protocol + '.' : '';
         const messages = {
           lead: 'Recebemos sua mensagem. Nossa equipe entrará em contato em breve.',
@@ -427,5 +518,46 @@
     );
     counters.forEach(c => counterObserver.observe(c));
   }
+
+  /* ===== COOKIE CONSENT ===== */
+  const COOKIE_CONSENT_KEY = 'nextep_cookie_consent_v1';
+
+  function initCookieBanner() {
+    let consent = null;
+    try { consent = localStorage.getItem(COOKIE_CONSENT_KEY); } catch {}
+    if (consent) return;
+
+    const segments = window.location.pathname.split('/').filter(Boolean);
+    const dirDepth = window.location.pathname.endsWith('/') ? segments.length : Math.max(0, segments.length - 1);
+    const privacyHref = '../'.repeat(dirDepth) + 'politica-de-privacidade/';
+
+    const banner = document.createElement('div');
+    banner.className = 'nextep-cookie-banner';
+    banner.setAttribute('role', 'dialog');
+    banner.setAttribute('aria-label', 'Aviso de cookies');
+    banner.innerHTML =
+      '<div class="nextep-cookie-banner__text">' +
+        '<strong>Usamos cookies.</strong> Utilizamos cookies para melhorar sua experiência e analisar o tráfego do site. ' +
+        'Você pode aceitar ou recusar os cookies não essenciais. Saiba mais na ' +
+        '<a class="nextep-cookie-banner__link" href="' + privacyHref + '">Política de Privacidade</a>.' +
+      '</div>' +
+      '<div class="nextep-cookie-banner__actions">' +
+        '<button type="button" class="nextep-cookie-banner__btn nextep-cookie-banner__btn--reject" data-cookie="reject">Recusar</button>' +
+        '<button type="button" class="nextep-cookie-banner__btn nextep-cookie-banner__btn--accept" data-cookie="accept">Aceitar</button>' +
+      '</div>';
+
+    document.body.appendChild(banner);
+
+    function choose(value) {
+      try { localStorage.setItem(COOKIE_CONSENT_KEY, value); } catch {}
+      banner.classList.add('is-leaving');
+      setTimeout(() => banner.remove(), 240);
+    }
+
+    banner.querySelector('[data-cookie="accept"]').addEventListener('click', () => choose('accepted'));
+    banner.querySelector('[data-cookie="reject"]').addEventListener('click', () => choose('rejected'));
+  }
+
+  initCookieBanner();
 
 })();

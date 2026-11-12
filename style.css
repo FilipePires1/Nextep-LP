@@ -1880,3 +1880,125 @@ p { color: var(--text-secondary); line-height: 1.6; }
   .trust-item__number { font-size: 2rem; }
   .hero__badge { font-size: 0.8125rem; }
 }
+
+/* ===== COOKIES ===== */
+.nextep-cookie-banner {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 16px 18px;
+  background: rgba(23, 23, 23, 0.98);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(14px);
+  animation: cookieBannerIn 0.35s cubic-bezier(0.32, 0.72, 0, 1) both;
+}
+
+.nextep-cookie-banner.is-leaving {
+  animation: cookieBannerOut 0.22s ease forwards;
+}
+
+.nextep-cookie-banner__text {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.nextep-cookie-banner__text strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.nextep-cookie-banner__link {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.nextep-cookie-banner__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.nextep-cookie-banner__btn {
+  min-height: 40px;
+  padding: 0 16px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  font-family: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+
+.nextep-cookie-banner__btn--accept {
+  background: var(--accent);
+  color: #111111;
+}
+
+.nextep-cookie-banner__btn--accept:hover {
+  background: var(--accent-hover);
+}
+
+.nextep-cookie-banner__btn--reject {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+.nextep-cookie-banner__btn--reject:hover {
+  border-color: var(--border-hover);
+  color: var(--text-primary);
+}
+
+@keyframes cookieBannerIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cookieBannerOut {
+  to { opacity: 0; transform: translateY(12px); }
+}
+
+/* ===== TURNSTILE ===== */
+.turnstile-slot {
+  width: 100%;
+  margin: 4px 0 14px;
+}
+
+.turnstile-slot[hidden] {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .nextep-cookie-banner {
+    flex-direction: column;
+    align-items: stretch;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    padding: 14px;
+    gap: 12px;
+  }
+
+  .nextep-cookie-banner__actions {
+    width: 100%;
+  }
+
+  .nextep-cookie-banner__btn {
+    flex: 1;
+    min-height: 44px;
+  }
+}
